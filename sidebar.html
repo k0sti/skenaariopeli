@@ -49,24 +49,52 @@
 </div>
 -->
 <div class="widget-info">
-    <p>
-    <h1>Tervetuloa Skenaariopeliin!</h1>
-    Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
-    Seuraavan noin 90 minuutin aikana luodaan 2–5 hengen ryhmässä yksi mahdollinen tulevaisuusskenaario teitä kiinnostavasta aiheesta. Lopuksi joku ryhmästänne kertoo siitä 2 minuutin kiteytetyn tarinan, joka kannattaa tallentaa muistoksi.
-    </p>
-    <p>
-    Nyt saa luvan kanssa irtautua todennäköisestä, revitellä, käyttää omaa intuitiota ja ruokkia toisten hulluja ajatuksia! Pelin ohjeet opastavat joka vaiheessa.
-    </p>
-    <p>
-    Aloitetaanko? Paina Eteenpäin-nappia siirtyäksesi pelin ensimmäiseen pelin kuudesta vaiheesta.
-    </p>
-    <button class="mui-btn mui-btn--primary mui-btn--raised">Eteenpäin</button>
+    <h1 id="step_head"></h1>
+    <div id="step_text">
+    </div>
+    <button class="mui-btn mui-btn--primary mui-btn--raised" onclick="stepForward()">Eteenpäin</button>
     <!--
     <p id="widget-name"></p>
     <textarea placeholder="Add some notes here. Saves locally" id="editor" class="editor">text word</textarea>
     -->
 </div>
 <script>
+    changeState("welcome");
+
+	miro.onReady(() => {
+        changeState("welcome");
+	})
+
+    function stepForward() {
+        alert("Next step")
+    }
+
+    function formatPlainText(text) {
+        return text.replace(/^(?!<p>)(.*)(?!<\/p>)$/gm, "<p>$1</p>");
+    }
+
+    function changeState(stateId) {
+        var stateData;
+
+        switch(stateId) {
+            case "welcome":
+                stateData = {
+                    head: `Tervetuloa Skenaariopeliin`,
+                    text: `
+Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
+
+Seuraavan noin 90 minuutin aikana luodaan 2–5 hengen ryhmässä yksi mahdollinen tulevaisuusskenaario teitä kiinnostavasta aiheesta. Lopuksi joku ryhmästänne kertoo siitä 2 minuutin kiteytetyn tarinan, joka kannattaa tallentaa muistoksi.
+
+Nyt saa luvan kanssa irtautua todennäköisestä, revitellä, käyttää omaa intuitiota ja ruokkia toisten hulluja ajatuksia! Pelin ohjeet opastavat joka vaiheessa.
+
+Aloitetaanko? Paina Eteenpäin-nappia siirtyäksesi pelin ensimmäiseen pelin kuudesta vaiheesta.
+`
+                }
+        }
+        document.getElementById("step_head").innerHTML = formatPlainText(stateData.head);
+        document.getElementById("step_text").innerHTML = formatPlainText(stateData.text);
+    }
+
 /*
 	let lastSelectedWidgetId
 	let widgetName = document.querySelector('#widget-name')
