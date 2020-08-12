@@ -1,10 +1,11 @@
 const ROW_HEIGHT = 30;
 const ROW_MARGIN = 10;
 const SPREADSHEET_URL =
-  "https://docs.google.com/spreadsheets/d/121-56BwZe8Cws0A8xE_cSGXc64YD_bBPfQM8o2YVnaM/edit?usp=sharing";
+  "https://docs.google.com/spreadsheets/d/1qswMijuMmv6wzbPzx8B8IBX3e1-otjM1Hk06KzxhQOE/edit?usp=sharing";
+
+console.log("-- Init google sheet sync - version 1");
 
 miro.onReady(function() {
-  /*
   miro.initialize({
     extensionPoints: {
       bottomBar: {
@@ -15,41 +16,40 @@ miro.onReady(function() {
       }
     }
   });
-  */
 });
 
 async function syncWithSheet() {
-  console.log("-- Testing google sheet sync - version 1");
+  console.log("-- Testing google sync");
 
   const appId = await miro.getClientId();
   const items = await Tabletop.init({
     key: SPREADSHEET_URL,
     simpleSheet: true
   });
+  console.log(items);
   const viewport = await miro.board.viewport.get();
-  const maxWidth = Math.max(...items.map(item => item.rate)) * 2;
 
-  items.forEach(async ({ role, rate }, i) => {
-    rate = parseFloat(rate);
+  items.forEach(async ({ iid, title, desc }, i) => {
+    console.log(`Item ${iid}, ${title}, ${desc}`);
+
 
     const shapes = (
       await miro.board.widgets.get({
         type: "shape"
       })
     ).filter(shape => !!shape.metadata[appId]);
-    const shape = shapes.find(shape => shape.metadata[appId].role === role);
-    const width = rate * 2;
+    const shape = shapes.find(shape => shape.metadata[appId].title === title);
 
     if (shape) {
-      const x = shape.x - (shape.width - width) / 2;
-      miro.board.widgets.update([{ id: shape.id, text: `${rate}%`, width, x }]);
+      const x = shape.x ;
+      miro.board.widgets.update([{ id: shape.id, text: title}]);
     } else {
-      const x = viewport.x + viewport.width / 2 - (maxWidth - width) / 2;
+      const x = viewport.x;
       const y = viewport.y + ROW_HEIGHT / 2 + (ROW_HEIGHT + ROW_MARGIN) * i;
       miro.board.widgets.create({
         type: "shape",
-        text: `${rate}%`,
-        width,
+        text: desc,
+        width: 200,
         height: ROW_HEIGHT,
         x,
         y,
@@ -63,23 +63,23 @@ async function syncWithSheet() {
         },
         metadata: {
           [appId]: {
-            role
+            title
           }
         }
       });
       miro.board.widgets.create({
         type: "text",
-        x: viewport.x + viewport.width / 2 - maxWidth - 110,
+        x: viewport.x - 110,
         y,
         width: 400,
         style: {
           textAlign: "r",
           fontSize: 12
         },
-        text: role,
+        text: title,
         metadata: {
           [appId]: {
-            role
+            title
           }
         }
       });
