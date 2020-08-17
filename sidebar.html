@@ -65,9 +65,14 @@
 
     changeState("welcome");
 
-	miro.onReady(async () => {
+    async function sidebarInit() {
         StepNumber = parseInt(await getSharedValue(SHARED_STEP));
         changeState("welcome");
+    }
+
+	miro.onReady(async () => {
+        // StepNumber = parseInt(await getSharedValue(SHARED_STEP));
+        // changeState("welcome");
 	})
 
     // Get a Miro Sticker to store sync data in

@@ -5,8 +5,8 @@
     <script type="text/javascript">
       console.log("---- Skenaariopeli Web-plugin Loaded - version 8");
 
-    miro.onReady(() => {
-      miro.initialize({
+    miro.onReady(async () => {
+      await miro.initialize({
         extensionPoints: {
           bottomBar: {
             title: 'Skenaariopeli',
@@ -18,7 +18,8 @@
           }
         }
       })
-      miro.board.ui.openLeftSidebar('skenaariopeli/sidebar.html');
+      await miro.board.ui.openLeftSidebar('skenaariopeli/sidebar.html');
+      await sidebarInit();
     })
     </script>
 </head>
