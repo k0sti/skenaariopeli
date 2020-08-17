@@ -53,6 +53,7 @@
     <h1 id="step_head"></h1>
     <div id="step_text">
     </div>
+    <button class="mui-btn mui-btn--secondary mui-btn--raised" onclick="stepBackward()">Edelliseen</button>
     <button class="mui-btn mui-btn--primary mui-btn--raised" onclick="stepForward()">Eteenpäin</button>
     <!--
     <p id="widget-name"></p>
@@ -119,14 +120,9 @@ Kiitoksia pelistä!
 
     changeState(StepNumber);
 
-    async function sidebarInit() {
+	miro.onReady(async () => {
         StepNumber = parseInt(await getSharedValue(SHARED_STEP));
         changeState(StepNumber);
-    }
-
-	miro.onReady(async () => {
-        // StepNumber = parseInt(await getSharedValue(SHARED_STEP));
-        // changeState(StepNumber);
 	})
 
     // Get a Miro Sticker to store sync data in
@@ -167,6 +163,15 @@ Kiitoksia pelistä!
         // alert("Next step")
         if (StepNumber < stepData.length) {
             StepNumber++;
+            setSharedValue(SHARED_STEP, StepNumber);
+            changeState(StepNumber)
+        }
+    }
+
+    function stepBackward() {
+        // alert("Previous step")
+        if (StepNumber > 0) {
+            StepNumber--;
             setSharedValue(SHARED_STEP, StepNumber);
             changeState(StepNumber)
         }
