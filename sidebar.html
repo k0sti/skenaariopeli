@@ -147,10 +147,23 @@ Kiitoksia pelistä!
     changeState(StepNumber);
 
 	miro.onReady(async () => {
-        await miro.initialize();
+        const authorized = await miro.isAuthorized();
+        if (authorized) {
+            initialize();
+        } else {
+            miro.board.ui.openModal('not-authorized.html')
+                .then(res => {
+                    if (res === 'success') {
+                        initialize();
+                    }
+                })
+        }
+	})
+
+    async function initialize() {
         StepNumber = parseInt(await getSharedValue(SHARED_STEP));
         changeState(StepNumber);
-	})
+    }
 
     // Get a Miro Sticker to store sync data in
     async function getMiroStickerByKey(key) {
