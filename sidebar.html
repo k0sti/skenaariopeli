@@ -147,7 +147,6 @@ Kiitoksia pelistä!
     changeState(StepNumber);
 
 	miro.onReady(async () => {
-        await miro.getClientId();
         const authorized = await miro.isAuthorized();
         if (authorized) {
             initialize();
