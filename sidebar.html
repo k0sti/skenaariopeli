@@ -61,18 +61,72 @@
 </div>
 <script>
     var StepNumber = 0;
-    const SHARED_STEP = "Step"
+    const SHARED_STEP = "Step";
 
-    changeState("welcome");
+    const stepData = [
+{ title: "Tervetuloa Skenaariopeliin!", body: `
+Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
+
+Seuraavan noin 90 minuutin aikana luodaan 2–5 hengen ryhmässä yksi mahdollinen tulevaisuusskenaario teitä kiinnostavasta aiheesta. Lopuksi joku ryhmästänne kertoo siitä 2 minuutin kiteytetyn tarinan, joka kannattaa tallentaa muistoksi.
+
+Nyt saa luvan kanssa irtautua todennäköisestä, revitellä, käyttää omaa intuitiota ja ruokkia toisten hulluja ajatuksia! Pelin ohjeet opastavat joka vaiheessa.
+
+Aloitetaanko? Paina Eteenpäin-nappia siirtyäksesi pelin ensimmäiseen pelin kuudesta vaiheesta.
+`},
+
+{ title: "1/6 Me ja skenaarion luonne", body: `
+Kirjoittakaa kortille, kenen näkökulmasta tulevaisuutta tarkastelette.
+
+esim. “Yle".
+`},
+
+{ title: "1/6 Me ja skenaarion luonne", body: `
+Kirjoittakaa kortille skenaarionne tarkasteluvuosi.
+
+esim. "2030" tai "2050"
+`},
+
+{ title: "1/6 Me ja skenaarion luonne", body: `
+Kirjoittakaa, minkä luonteisen skenaarion laaditte.
+
+esim. toivottava/epätoivottava, todennäköinen/epätodennäköinen
+`},
+
+{ title: "2/6 Maailma vuonna {scenario_year}", body: `
+Valitkaa 5 ilmiötä, jotka ovat tehneet vuoden {scenario_year} maailmasta sellaisen kuin se on.
+`},
+
+{ title: "2/6 Maailma vuonna {scenario_year}", body: `
+3/6 {scenario_actor} vuonna {scenario_year}	Miettikää, mitkä ovat 3 olennaista ominaisuutta, joilla olette mukautuneet vuoden {scenario_year} maailmaan.
+`},
+
+{ title: "2/6 Maailma vuonna {scenario_year}", body: `
+4/6 Miten tähän päädyttiin?	Kuvitelkaa itsenne vuoteen {scenario_year} ja muistelkaa, mitkä tapahtumat vuosina {backcast_year_4}, {backcast_year_3}, {backcast_year_2} ja {backcast_year_1} johtivat siihen, millainen {scenario_actor} on vuonna {scenario_year}.
+`},
+
+{ title: "2/6 Maailma vuonna {scenario_year}", body: `
+5/6 Dokumentoi	"Valmistelkaa ja kertokaa 2 minuutin tarina tulevaisuuden maailmasta, itsestänne siellä sekä kohokohdat tapahtumista, jotka siihen johtivat.
+
+Vinkki: Tarinan dokumentoimiseen voi käyttää vaikkapa videopuhelun tallennustoimintoa [Ohjeita]."
+`},
+
+{ title: "2/6 Maailma vuonna {scenario_year}", body: `
+6/6 Jaa ja keskustele	"Käyttäkää pieni hetki keskusteluun pelin tuloksista: Kerro vuorollasi muille, mikä yllätti, mikä energisoi, mikä ehkä säikäytti. Minkä ajatuksen kanssa haluat edetä pelin jälkeen, miten ja kenen kanssa.
+
+Kiitoksia pelistä!
+`},
+];
+
+    changeState(StepNumber);
 
     async function sidebarInit() {
         StepNumber = parseInt(await getSharedValue(SHARED_STEP));
-        changeState("welcome");
+        changeState(StepNumber);
     }
 
 	miro.onReady(async () => {
         // StepNumber = parseInt(await getSharedValue(SHARED_STEP));
-        // changeState("welcome");
+        // changeState(StepNumber);
 	})
 
     // Get a Miro Sticker to store sync data in
@@ -110,10 +164,12 @@
     }
 
     function stepForward() {
-        alert("Next step")
-        StepNumber++;
-        setSharedValue(SHARED_STEP, StepNumber);
-        changeState("welcome")
+        // alert("Next step")
+        if (StepNumber < stepData.length) {
+            StepNumber++;
+            setSharedValue(SHARED_STEP, StepNumber);
+            changeState(StepNumber)
+        }
     }
 
     function formatPlainText(text) {
@@ -121,26 +177,11 @@
     }
 
     function changeState(stateId) {
-        var stateData;
+        var stateData = stepData[stateId];
 
-        switch(stateId) {
-            case "welcome":
-                stateData = {
-                    head: `Tervetuloa Skenaariopeliin`,
-                    text: `
-Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
-
-Seuraavan noin 90 minuutin aikana luodaan 2–5 hengen ryhmässä yksi mahdollinen tulevaisuusskenaario teitä kiinnostavasta aiheesta. Lopuksi joku ryhmästänne kertoo siitä 2 minuutin kiteytetyn tarinan, joka kannattaa tallentaa muistoksi.
-
-Nyt saa luvan kanssa irtautua todennäköisestä, revitellä, käyttää omaa intuitiota ja ruokkia toisten hulluja ajatuksia! Pelin ohjeet opastavat joka vaiheessa.
-
-Aloitetaanko? Paina Eteenpäin-nappia siirtyäksesi pelin ensimmäiseen pelin kuudesta vaiheesta.
-`
-                }
-        }
         document.getElementById("step_number").innerHTML = "Shared Step: "+StepNumber;
-        document.getElementById("step_head").innerHTML = formatPlainText(stateData.head);
-        document.getElementById("step_text").innerHTML = formatPlainText(stateData.text);
+        document.getElementById("step_head").innerHTML = formatPlainText(stateData.title);
+        document.getElementById("step_text").innerHTML = formatPlainText(stateData.body);
     }
 
 /*
