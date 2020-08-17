@@ -76,7 +76,7 @@
 </div>
 <div class="bottom_navi">
     <button class="mui-btn mui-btn--secondary mui-btn--raised" onclick="stepBackward()"> <i class="fas fa-backward"></i> </button>
-    <button class="mui-btn mui-btn--primary mui-btn--raised" onclick="stepForward()">Eteenpäin</button>
+    <button class="mui-btn mui-btn--primary mui-btn--raised" onclick="stepForward()">Eteenpäin <i class="fas fa-forward"></i></button>
 </div>
 <script>
     var StepNumber = 0;
@@ -139,6 +139,7 @@ Kiitoksia pelistä!
     changeState(StepNumber);
 
 	miro.onReady(async () => {
+        await miro.initialize();
         StepNumber = parseInt(await getSharedValue(SHARED_STEP));
         changeState(StepNumber);
 	})
