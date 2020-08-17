@@ -151,7 +151,7 @@ Kiitoksia pelistä!
         if (authorized) {
             initialize();
         } else {
-            miro.board.ui.openModal('not-authorized.html')
+            miro.board.ui.openModal('skenaariopeli/not-authorized.html')
                 .then(res => {
                     if (res === 'success') {
                         initialize();
