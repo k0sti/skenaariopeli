@@ -21,40 +21,6 @@
       await miro.board.ui.openLeftSidebar('skenaariopeli/sidebar.html');
     })
 
-    // Get a Miro Sticker to store sync data in
-    async function getMiroStickerByKey(key) {
-        var searchString = `${key}: `;
-        var elements = await miro.board.widgets.get({
-            type: "sticker"
-        });
-        var element = elements.find(candidate => candidate.plainText.startsWith(searchString));
-        // miro.board.widgets.update([{ id: element.id, clientVisible: false}])
-        return element;
-    }
-
-    // Fetch value for key from a Miro Sticker
-    async function getSharedValue(key) {
-        let element = await getMiroStickerByKey(key);
-        if (element) {
-            return await element.plainText.substring(key.length + 2); // Skip key name and ": "
-        } else {
-            return undefined;
-        }
-    }
-
-    // Store value for key from a Sticker
-    async function setSharedValue(key, value) {
-        let element = await getMiroStickerByKey(key);
-        let text = `${key}: ${value}`;
-        if (element) {
-            await miro.board.widgets.update([{ id: element.id, text: text}]);
-        } else {
-            await miro.board.widgets.create([
-                {type: 'sticker', text: text, /* clientVisible: false, */ }
-            ]);
-        }
-    }
-
     </script>
 </head>
 </html>
