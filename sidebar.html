@@ -188,7 +188,7 @@ Kiitoksia pelistä!
 
     function stepForward() {
         // alert("Next step")
-        if (StepNumber < stepData.length) {
+        if (StepNumber < stepData.length-1) {
             StepNumber++;
             setSharedValue(SHARED_STEP, StepNumber);
             changeState(StepNumber)
