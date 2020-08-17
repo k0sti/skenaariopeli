@@ -65,7 +65,7 @@
 
     changeState("welcome");
 
-	miro.onReady(() => {
+	miro.onReady(async () => {
         StepNumber = await parseInt(getSharedValue(SHARED_STEP));
         changeState("welcome");
 	})
