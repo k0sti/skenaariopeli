@@ -76,7 +76,7 @@
 </div>
 <div class="bottom_navi">
     <button class="mui-btn mui-btn--secondary mui-btn--raised" onclick="stepBackward()"> <i class="fas fa-backward"></i> </button>
-    <button class="mui-btn mui-btn--primary mui-btn--raised" onclick="stepForward()">Eteenpäin <i class="fas fa-forward"></i></button>
+    <button class="mui-btn mui-btn--primary mui-btn--raised" onclick="stepForward()">Eteenpäin &nbsp;<i class="fas fa-forward"></i></button>
 </div>
 <script>
     var StepNumber = 0;
@@ -135,6 +135,14 @@ Käyttäkää pieni hetki keskusteluun pelin tuloksista: Kerro vuorollasi muille
 Kiitoksia pelistä!
 `},
 ];
+    var replacements = [
+        ["{scenario_actor}", "Yle"],
+        ["{scenario_year}", "2030"],
+        ["{backcast_year_4}", "2029"],
+        ["{backcast_year_3}", "2027"],
+        ["{backcast_year_2}", "2023"],
+        ["{backcast_year_1}", "2021"],
+    ];
 
     changeState(StepNumber);
 
@@ -197,7 +205,12 @@ Kiitoksia pelistä!
     }
 
     function formatPlainText(text) {
-        return text.replace(/^(?!<p>)(.*)(?!<\/p>)$/gm, "<p>$1</p>");
+        var formattedText = text;
+        // use string replacements
+        formattedText = replacements.reduce((prev, replacementData) => prev.replace(new RegExp(replacementData[0], 'g'), replacementData[1]), formattedText);
+        // add html paragraph breaks
+        formattedText = formattedText.replace(/^(?!<p>)(.*)(?!<\/p>)$/gm, "<p>$1</p>");
+        return formattedText;
     }
 
     function changeState(stateId) {
