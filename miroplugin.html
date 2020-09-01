@@ -3,24 +3,8 @@
 <head>
     <script type="text/javascript" src="https://miro.com/app/static/sdk.1.1.js"></script>
     <script type="text/javascript">
-      console.log("---- Skenaariopeli Web-plugin Loaded - version 8");
-
-    miro.onReady(async () => {
-      await miro.initialize({
-        extensionPoints: {
-          bottomBar: {
-            title: 'Skenaariopeli',
-            svgIcon: '<circle cx="12" cy="12" r="9" fill="none" fill-rule="evenodd" stroke="currentColor" stroke-width="2"/>',
-            onClick: () => {
-              //alert('Tämä koodi tulee kostin koneelta4!');
-              miro.board.ui.openLeftSidebar('skenaariopeli/sidebar.html');
-            }
-          }
-        }
-      })
-      await miro.board.ui.openLeftSidebar('skenaariopeli/sidebar.html');
-    })
-
+      console.log("---- Skenaariopeli Web-plugin Loaded - version 9");
     </script>
+    <script type="text/javascript" src="applogic.js"></script>
 </head>
 </html>
