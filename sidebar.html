@@ -147,6 +147,9 @@ Kiitoksia pelistä!
     changeState(StepNumber);
 
 	miro.onReady(async () => {
+        initialize();
+        // Below: Spawn authorization dialog
+        /*
         const authorized = await miro.isAuthorized();
         if (authorized) {
             initialize();
@@ -158,11 +161,15 @@ Kiitoksia pelistä!
                     }
                 })
         }
+        */
 	})
 
     async function initialize() {
         StepNumber = parseInt(await getSharedValue(SHARED_STEP));
         changeState(StepNumber);
+
+        var poll = setInterval(pollCallback, 2000);
+        // clearInterval(poll)
     }
 
     function stepForward() {
@@ -199,6 +206,14 @@ Kiitoksia pelistä!
         document.getElementById("step_head").innerHTML = formatPlainText(stateData.title);
         document.getElementById("step_text").innerHTML = formatPlainText(stateData.body);
     }
+
+    async function pollCallback() {
+        let sharedState = parseInt(await getSharedValue(SHARED_STEP));
+        if (StepNumber != sharedState) {
+            StepNumber = sharedState;
+            changeState(StepNumber)
+        }
+    } 
 
     // Get a Miro Sticker to store sync data in
     async function getMiroStickerByKey(key) {

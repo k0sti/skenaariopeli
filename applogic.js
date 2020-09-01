@@ -1,4 +1,4 @@
-console.log("-- Init Skenaariopeli applogic.js - version 3");
+console.log("-- Init Skenaariopeli applogic.js - version 4");
 
 miro.onReady(function() {
   miro.initialize({
@@ -14,3 +14,7 @@ miro.onReady(function() {
   });
   miro.board.ui.openLeftSidebar('skenaariopeli/sidebar.html');
 })
+
+function debug() {
+  console.log("Debug");
+}
