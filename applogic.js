@@ -1,6 +1,22 @@
 console.log("-- Init Skenaariopeli applogic.js - version 4");
 
-miro.onReady(function() {
+miro.onReady(async function() {
+  const authorized = await miro.isAuthorized();
+  if (authorized) {
+    console.log("Authorized")
+    initialize();
+  } else {
+    console.log("Not authorized")
+    miro.board.ui.openModal('skenaariopeli/not-authorized.html')
+      .then(res => {
+        if (res === 'success') {
+          initialize();
+        }
+      })
+  }
+})
+
+function initialize() {
   miro.initialize({
     extensionPoints: {
       bottomBar: {
@@ -13,8 +29,8 @@ miro.onReady(function() {
     }
   });
   miro.board.ui.openLeftSidebar('skenaariopeli/sidebar.html');
-})
+}
 
-function debug() {
+function updateViewport() {
   console.log("Debug");
 }
