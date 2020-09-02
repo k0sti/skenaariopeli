@@ -110,7 +110,6 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
 
 <i>esim. toivottava/epätoivottava, todennäköinen/epätodennäköinen</i>
 `,
-onExit: validateMeJaSkenaarionLuonne,
 },
 
 { title: "2/6 Maailma vuonna {scenario_year}", body: `
@@ -174,13 +173,10 @@ Kiitoksia pelistä!
         // clearInterval(poll)
     }
 
-    function stepForward() {
-        var stateData = stepData[StepNumber];
+    async function stepForward() {
         // alert("Next step")
         if (StepNumber < stepData.length-1) {
-            if (stateData.onExit) {
-                stateData.onExit();
-            }
+            await onExitState(StepNumber);
             StepNumber++;
             setSharedValue(SHARED_STEP, StepNumber);
             changeState(StepNumber)
@@ -221,7 +217,7 @@ Kiitoksia pelistä!
         }
     }
 
-    async function validateMeJaSkenaarionLuonne() {
+    async function onExitState(state) {
         let actorResponse = await getContainedStickerText("SCENARIO_ACTOR_CONTAINER");
         if (actorResponse.success) {
             replacements["{scenario_actor}"] = actorResponse.value;
