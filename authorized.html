@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>
-<h1>App installed</h1>
-<script>
-	if(window.opener) {
-		// Close this window
-		window.opener.miroAuthorized()
-    }
-</script>
-</body>
+  <body>
+    <h1>Skenaariopeli asennettu</h1>
+    <p>Voit nyt sulkea tämän ikkunan.</p>
+    <script>
+        if(window.opener) {
+            // Close this window
+            window.opener.miroAuthorized();
+        }
+        window.close();
+    </script>
+  </body>
 </html>
