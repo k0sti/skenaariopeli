@@ -109,7 +109,9 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i> skenaarionne tarkastelu
 Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen skenaarion laaditte.
 
 <i>esim. toivottava/epätoivottava, todennäköinen/epätodennäköinen</i>
-`},
+`,
+onExit: validateMeJaSkenaarionLuonne,
+},
 
 { title: "2/6 Maailma vuonna {scenario_year}", body: `
 Valitkaa 5 ilmiötä, jotka ovat tehneet vuoden {scenario_year} maailmasta sellaisen kuin se on.
@@ -135,14 +137,14 @@ Käyttäkää pieni hetki keskusteluun pelin tuloksista: Kerro vuorollasi muille
 Kiitoksia pelistä!
 `},
 ];
-    var replacements = [
-        ["{scenario_actor}", "Yle"],
-        ["{scenario_year}", "2030"],
-        ["{backcast_year_4}", "2029"],
-        ["{backcast_year_3}", "2027"],
-        ["{backcast_year_2}", "2023"],
-        ["{backcast_year_1}", "2021"],
-    ];
+    var replacements = {
+        "{scenario_actor}": "Yle",
+        "{scenario_year}": "2030",
+        "{backcast_year_4}": "2029",
+        "{backcast_year_3}": "2027",
+        "{backcast_year_2}": "2023",
+        "{backcast_year_1}": "2021",
+    };
 
     changeState(StepNumber);
 
@@ -173,8 +175,12 @@ Kiitoksia pelistä!
     }
 
     function stepForward() {
+        var stateData = stepData[StepNumber];
         // alert("Next step")
         if (StepNumber < stepData.length-1) {
+            if (stateData.onExit) {
+                stateData.onExit();
+            }
             StepNumber++;
             setSharedValue(SHARED_STEP, StepNumber);
             changeState(StepNumber)
@@ -193,7 +199,7 @@ Kiitoksia pelistä!
     function formatPlainText(text) {
         var formattedText = text;
         // use string replacements
-        formattedText = replacements.reduce((prev, replacementData) => prev.replace(new RegExp(replacementData[0], 'g'), replacementData[1]), formattedText);
+        formattedText = Object.keys(replacements).reduce((prev, key) => prev.replace(new RegExp(key, 'g'), replacements[key]), formattedText);
         // add html paragraph breaks
         formattedText = formattedText.replace(/^(?!<p>)(.*)(?!<\/p>)$/gm, "<p>$1</p>");
         return formattedText;
@@ -213,7 +219,20 @@ Kiitoksia pelistä!
             StepNumber = sharedState;
             changeState(StepNumber)
         }
-    } 
+    }
+
+    async function validateMeJaSkenaarionLuonne() {
+        let actorResponse = await getContainedStickerText("SCENARIO_ACTOR_CONTAINER");
+        if (actorResponse.success) {
+            replacements["{scenario_actor}"] = actorResponse.value;
+        }
+        let yearResponse = await getContainedStickerText("SCENARIO_YEAR_CONTAINER");
+        if (yearResponse.success) {
+            replacements["{scenario_year}"] = yearResponse.value;
+        }
+        console.log("Actor: "+actorResponse.value);
+        console.log("Year: "+yearResponse.value);
+    }
 
     // Get a Miro Sticker to store sync data in
     async function getMiroStickerByKey(key) {
@@ -247,6 +266,60 @@ Kiitoksia pelistä!
                 {type: 'sticker', text: text, /* clientVisible: false, */ }
             ]);
         }
+    }
+
+    async function getMiroElementByContent(key) {
+        return (await miro.board.widgets.get({plainText: key}))[0];
+    }
+
+    async function getIntersectedStickers(container) {
+        let stickers = await miro.board.widgets.get({
+            type: "sticker"
+        });
+        let elements = stickers.filter( (sticker) => {
+            if (sticker.bounds.right < container.bounds.left) return false;
+            if (sticker.bounds.left > container.bounds.right) return false;
+            if (sticker.bounds.bottom < container.bounds.top) return false;
+            if (sticker.bounds.top > container.bounds.bottom) return false;
+            return true;
+        });
+        return elements;
+    }
+
+    // Expect just one sticker
+    async function getContainedStickerText(containerContent) {
+        let container = await getMiroElementByContent(containerContent);
+        if (!container) {
+            let response = {
+                success: false,
+                errorMessage: `Aluetta nimeltä ${containerContent} ei löytynyt.`,
+            }
+            console.warn(response.errorMessage);
+            return response;
+        }
+
+        let containedStickers = await getIntersectedStickers(container);
+        if (containedStickers.length < 1) {
+            let response = {
+                success: false,
+                errorMessage: `Yhtään tarralappua ei löytynyt alueella ${container.plainText}`,
+            }
+            console.warn(response.errorMessage);
+            return response;
+        }
+        if (containedStickers.length > 1) {
+            let response = {
+                success: false,
+                errorMessage: `Useita tarralappuja löydettiin alueella ${container.plainText}`,
+            }
+            console.warn(response.errorMessage);
+            return response;
+        }
+        let response = {
+            success: true,
+            value: containedStickers[0].plainText,
+        }
+        return response;
     }
 
 /*

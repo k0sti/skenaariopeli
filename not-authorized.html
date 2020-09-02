@@ -4,23 +4,40 @@
     <script type="text/javascript" src="https://miro.com/app/static/sdk.1.1.js"></script>
 </head>
 <body>
-<h2>Please authorize the app.</h2>
-<button>Authorize</button>
+<h2>Skenaariopelin asennus</h2>
+<p>Aloita Skenaariopeli asentamalla Miro web plugin komponentti.</p>
+<button id="authorize">Asenna Skenaariopeli</button>
+<p>Lataa tämä sivu uudelleen kun Skenaariopeli on asennettu.</p>
 <script>
-	document.querySelector('button').addEventListener('click', function () {
+	document.querySelector('#authorize').addEventListener('click', function () {
 		const authorizeOptions = {
 			response_type: 'token',
-			redirect_uri: 'https://molybo.github.io/skenaariopeli'
+			redirect_uri: 'https://molybo.github.io/skenaariopeli/authorized.html'
 		}
 		miro.authorize(authorizeOptions)
 			.then(() => miro.getToken())
 			.then((token) => {
 				if (token) {
+					console.log('Closing window')
 					miro.board.ui.closeModal('success')
 				} else {
 					console.log('Something went wrong')
 				}
 			})
+	})
+	document.querySelector('#done').addEventListener('click', async function () {
+		token = await miro.getToken();
+		console.log('Auth done '+token)
+		if (token) {
+			//console.log('Closing window')
+			//location.reload()
+			//miro.board.ui.closeModal('success')
+		}
+		if (window.opener) {
+			// Close this window
+			console.log('Auth done2')
+			window.opener.miroAuthorized()
+		}
 	})
 </script>
 </body>
