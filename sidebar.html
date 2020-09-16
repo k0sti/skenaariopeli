@@ -13,22 +13,9 @@
             margin: 0;
             padding: 0;
         }
-        .rtb-sidebar-caption {
-            font-size: 14px;
-            font-weight: bold;
-            color: rgba(0, 0, 0, 0.8);
-            padding: 24px 0 0 24px;
-        }
-
-        .no-selected-widget {
-            font-size: 18px;
-            text-align: center;
-            margin-top: 60px;
-            color: #999;
-        }
 
         .widget-info {
-            padding: 20px 24px 0 24px;
+            padding: 20px 24px 8em 24px;
             height: 100%;
         }
 
@@ -46,7 +33,7 @@
         .bottom_navi {
             text-align: right;
             background: white;
-            position: absolute;
+            position: fixed;
             box-sizing: border-box;
             padding: 2em;
             margin: 0;
@@ -65,7 +52,6 @@
 </div>
 -->
 <div class="widget-info">
-    <div id="step_number"></div>
     <h1 id="step_head"></h1>
     <div id="step_text">
     </div>
@@ -75,28 +61,35 @@
     -->
 </div>
 <div class="bottom_navi">
-    <button class="mui-btn mui-btn--secondary mui-btn--raised" onclick="stepBackward()"> <i class="fas fa-backward"></i><i class="fas fa-backward"></i> </button>
-    <button class="mui-btn mui-btn--secondary mui-btn--raised" onclick="stepBackward()"> <i class="fas fa-backward"></i> </button>
-    <button class="mui-btn mui-btn--primary mui-btn--raised" onclick="stepForward()">Eteenpäin &nbsp;<i class="fas fa-forward"></i></button>
-    <button class="mui-btn mui-btn--secondary mui-btn--raised" onclick="stepForward()"><i class="fas fa-forward"></i><i class="fas fa-forward"></i></button>
+    <div style="float:left;" id="step_number"></div>
+    <button class="mui-btn mui-btn--secondary mui-btn--raised" onclick="stepBackward(true)"> <i class="fas fa-backward"></i> </button>
+    <button class="mui-btn mui-btn--secondary mui-btn--raised" onclick="stepBackward()"> <i class="fas fa-step-backward"></i> </button>
+    <button class="mui-btn mui-btn--primary mui-btn--raised" onclick="stepForward()">Eteenpäin &nbsp;<i class="fas fa-play"></i></button>
+    <button class="mui-btn mui-btn--secondary mui-btn--raised" onclick="stepForward(true)"><i class="fas fa-forward"></i></button>
 </div>
 <script>
+    var MiroEnabled = miro && miro.board;
     var StepNumber = 0;
     const SHARED_STEP = "Step";
 
     const stepData = [
-{ title: "Tervetuloa Skenaariopeliin!", body: `
-Seuraavan noin 90 minuutin aikana luodaan 2–5 hengen ryhmässä yksi mahdollinen tulevaisuusskenaario teitä kiinnostavasta aiheesta. Lopuksi joku ryhmästänne kertoo siitä 2 minuutin kiteytetyn tarinan, joka kannattaa tallentaa muistoksi.
-
-Nyt saa luvan kanssa irtautua todennäköisestä, revitellä, käyttää omaa intuitiota ja ruokkia toisten hulluja ajatuksia! Pelin ohjeet opastavat joka vaiheessa.
-
-Aloitetaanko? Paina Eteenpäin-nappia siirtyäksesi pelin ensimmäiseen pelin kuudesta vaiheesta.
-`},
-
-{ title: "1/6 Me ja skenaarion luonne", body: `
+{ title: "Tervetuloa Skenaariopeliin!", cuePoint: true, body: `
 Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
 
-Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, kenen näkökulmasta tulevaisuutta tarkastelette.
+Seuraavan noin 90 minuutin aikana luodaan 2–5 hengen ryhmässä yksi mahdollinen tulevaisuusskenaario ryhmäänne kiinnostavasta aiheesta. Lopuksi joku ryhmästänne kertoo siitä 2 minuutin kiteytetyn tarinan, joka kannattaa tallentaa muistoksi.
+
+Suosittelemme, että ryhmä valitsee aluksi keskuudestaan pelinjohtajan, joka huolehtii pelin etenemisestä.
+
+Painakaa <b>Eteenpäin <i class="fas fa-play"></i></b> -nappia kun olette valmiita aloittamaan!
+
+Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit tutustua Miron esittelyvideoon tai harjoitella <b><i class="far fa-sticky-note"></i> tarralappujen</b> vetämistä työkalupakista taululle.
+
+<iframe width="200" height="150" src="https://www.youtube.com/embed/7L1-0DOGHDY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+`},
+
+{ title: "1/6 Me ja skenaarion luonne", cuePoint: true, body: `
+Kirjoittakaa aluksi <b>lapulle <i class="far fa-sticky-note"></i></b>, kenen näkökulmasta tulevaisuutta tarkastelette.
 
 <i>esim. “Yle".</i>
 `},
@@ -114,26 +107,88 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
 `,
 },
 
-{ title: "2/6 Maailma vuonna {scenario_year}", body: `
-Valitkaa 5 ilmiötä, jotka ovat tehneet vuoden {scenario_year} maailmasta sellaisen kuin se on.
+{ title: "2/6 Maailma vuonna {scenario_year}", cuePoint: true, body: `
+
+<b>Tutustu</b> hetki pöydällä oleviin, tulevaisuutta muokkaaviin ilmiöihin.
+
+<b><i class="fas fa-mouse-pointer"></i> Osoita</b> sitten ilmiötä, joka on ollut vaikuttavin vuoden {scenario_year} maailmassa.
+
+<b>Siivotkaa</b> pöydältä ne ilmiöt, jotka eivät tulleet valituksi.
+
+<b>Eteenpäin <i class="fas fa-play"></i></b> -nappi jakaa valittavaksi uusia ilmiöitä, kunnes pöydällä on 5 valittua ilmiötä.
+`},
+
+{ title: "3/6 {scenario_actor} vuonna {scenario_year}", cuePoint: true, body: `
+<b><i class="far fa-sticky-note"></i> Kirjoita</b> omalle kortille yksi olennainen ominaisuus, jolla {scenario_actor} on sopeutunut vuoden {scenario_year} maailmaan.
+<i>Aloita vaikkapa "{scenario_actor} on..."</i>
+
+<b>Esitelkää</b> vuorollanne omat ehdotuksenne muille.
 `},
 
 { title: "3/6 {scenario_actor} vuonna {scenario_year}", body: `
-Miettikää, mitkä ovat 3 olennaista ominaisuutta, joilla olette mukautuneet vuoden {scenario_year} maailmaan.
+<b><i class="far fa-sticky-note"></i> Kirjoita</b> uudelle kortille vielä yksi lisäominaisuus. Voit yhdistellä tai kehitellä jotain ehdotettua ominaisuutta!
+
+<b>Esitelkää</b> vuorollanne myös nämä ehdotukset.
 `},
 
-{ title: "4/6 Miten tähän päädyttiin?", body: `
-Kuvitelkaa itsenne vuoteen {scenario_year} ja muistelkaa, mitkä tapahtumat vuosina {backcast_year_4}, {backcast_year_3}, {backcast_year_2} ja {backcast_year_1} johtivat siihen, millainen {scenario_actor} on vuonna {scenario_year}.
+{ title: "3/6 {scenario_actor} vuonna {scenario_year}", body: `
+<b><i class="fas fa-mouse-pointer"></i> Osoita</b> ominaisuutta, joka on mielestäsi olennaisin ja skenaarion luonteen mukainen.
+
+<b>Keskustelkaa</b> valinnoista ja jättäkää pöydälle 3 ominaisuutta. Muokatkaa ja yhdistäkää ominaisuuksia tarvittaessa.
 `},
 
-{ title: "5/6 Dokumentoi", body: `
+{ title: "4/6 Miten tähän päädyttiin?", cuePoint: true, body: `
+Eletään vuotta {scenario_year}. Seuraavaksi muistellaan, mitkä aiemmat tapahtumat ovat johtaneet siihen, millainen {scenario_actor} on nyt.
+
+<b><i class="far fa-sticky-note"></i> Kirjoita</b> kortille jokin kiinnostava kehityskulku vuoden {backcast_year_4} paikkeilta, joka vaikutti jonkin ominaisuuden kehittymiseen.
+
+<b>Esitelkää</b> vuorollanne tapahtumat muille.
+
+<b><i class="fas fa-mouse-pointer"></i> Osoita</b> sitten tapahtumaa, joka parhaiten selittää tulevan kehityksen.
+
+<b>Asetelkaa</b> nämä tapahtumat ne aikajanalle ja siirtäkää muut sivuun.
+`},
+
+{ title: "4/6 Miten tähän päädyttiin?", cuePoint: false, body: `
+<b><i class="far fa-sticky-note"></i> Kirjoita</b> kortille jokin kiinnostava kehityskulku vuoden {backcast_year_3} paikkeilta, joka vaikutti jonkin ominaisuuden kehittymiseen.
+
+<b>Esitelkää</b> vuorollanne tapahtumat muille.
+
+<b><i class="fas fa-mouse-pointer"></i> Osoita</b> sitten tapahtumaa, joka parhaiten selittää tulevan kehityksen.
+
+<b>Asetelkaa</b> nämä tapahtumat ne aikajanalle ja siirtäkää muut sivuun.
+`},
+
+{ title: "4/6 Miten tähän päädyttiin?", cuePoint: false, body: `
+<b><i class="far fa-sticky-note"></i> Kirjoita</b> kortille jokin kiinnostava kehityskulku vuoden {backcast_year_2} paikkeilta, joka vaikutti jonkin ominaisuuden kehittymiseen.
+
+<b>Esitelkää</b> vuorollanne tapahtumat muille.
+
+<b><i class="fas fa-mouse-pointer"></i> Osoita</b> sitten tapahtumaa, joka parhaiten selittää tulevan kehityksen.
+
+<b>Asetelkaa</b> nämä tapahtumat ne aikajanalle ja siirtäkää muut sivuun.
+`},
+
+{ title: "4/6 Miten tähän päädyttiin?", cuePoint: false, body: `
+<b><i class="far fa-sticky-note"></i> Kirjoita</b> kortille jokin kiinnostava kehityskulku vuoden {backcast_year_1} paikkeilta, joka vaikutti jonkin ominaisuuden kehittymiseen.
+
+<b>Esitelkää</b> vuorollanne tapahtumat muille.
+
+<b><i class="fas fa-mouse-pointer"></i> Osoita</b> sitten tapahtumaa, joka parhaiten selittää tulevan kehityksen.
+
+<b>Asetelkaa</b> nämä tapahtumat ne aikajanalle ja siirtäkää muut sivuun.
+`},
+
+{ title: "5/6 Dokumentoi", cuePoint: true, body: `
 Valmistelkaa ja kertokaa 2 minuutin tarina tulevaisuuden maailmasta, itsestänne siellä sekä kohokohdat tapahtumista, jotka siihen johtivat.
 
 <i>Vinkki: Tarinan dokumentoimiseen voi käyttää vaikkapa videopuhelun tallennustoimintoa [Ohjeita].</i>
 `},
 
-{ title: "6/6 Jaa ja keskustele", body: `
-Käyttäkää pieni hetki keskusteluun pelin tuloksista: Kerro vuorollasi muille, mikä yllätti, mikä energisoi, mikä ehkä säikäytti. Minkä ajatuksen kanssa haluat edetä pelin jälkeen, miten ja kenen kanssa.
+{ title: "6/6 Jaa ja keskustele", cuePoint: true, body: `
+Käyttäkää pieni hetki keskusteluun pelin tuloksista.
+
+<b>Kerro</b> vuorollasi muille, mikä yllätti, mikä energisoi, mikä ehkä säikäytti. Minkä ajatuksen kanssa haluaisit edetä pelin jälkeen, miten ja kenen kanssa.
 
 Kiitoksia pelistä!
 `},
@@ -175,23 +230,30 @@ Kiitoksia pelistä!
         // clearInterval(poll)
     }
 
-    async function stepForward() {
-        // alert("Next step")
-        if (StepNumber < stepData.length-1) {
-            await onExitState(StepNumber);
+    async function stepForward(skipToCue) {
+        let stop = false;
+        while (StepNumber < stepData.length-1 && !stop) {
+            if (MiroEnabled) {
+                await onExitState(StepNumber);
+            }
             StepNumber++;
-            setSharedValue(SHARED_STEP, StepNumber);
-            changeState(StepNumber)
+            if (!skipToCue || stepData[StepNumber].cuePoint) stop = true;
         }
+        changeState(StepNumber);
+        if (MiroEnabled) setSharedValue(SHARED_STEP, StepNumber);
     }
 
-    function stepBackward() {
-        // alert("Previous step")
-        if (StepNumber > 0) {
+    async function stepBackward(skipToCue) {
+        let stop = false;
+        while (StepNumber > 0 && !stop) {
+            if (MiroEnabled) {
+                await onExitState(StepNumber);
+            }
             StepNumber--;
-            setSharedValue(SHARED_STEP, StepNumber);
-            changeState(StepNumber)
+            if (!skipToCue || stepData[StepNumber].cuePoint) stop = true;
         }
+        changeState(StepNumber);
+        if (MiroEnabled) setSharedValue(SHARED_STEP, StepNumber);
     }
 
     function formatPlainText(text) {
@@ -206,7 +268,7 @@ Kiitoksia pelistä!
     function changeState(stateId) {
         var stateData = stepData[stateId];
 
-        document.getElementById("step_number").innerHTML = "Shared Step: "+StepNumber;
+        document.getElementById("step_number").innerHTML = StepNumber;
         document.getElementById("step_head").innerHTML = formatPlainText(stateData.title);
         document.getElementById("step_text").innerHTML = formatPlainText(stateData.body);
     }
