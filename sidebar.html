@@ -76,14 +76,14 @@
       <div style="position: absolute" id="step_number"></div>
       <button
         class="mui-btn mui-btn--secondary mui-btn--raised"
-        style="padding-left: 0.5em; padding-right: 0.5em"
+        style="padding-left: 0.8em; padding-right: 0.8em"
         onclick="stepBackward(true)"
       >
         <i class="fas fa-backward"></i>
       </button>
       <button
         class="mui-btn mui-btn--secondary mui-btn--raised"
-        style="padding-left: 0.5em; padding-right: 0.5em"
+        style="padding-left: 0.8em; padding-right: 0.8em"
         onclick="stepBackward()"
       >
         <i class="fas fa-step-backward"></i>
@@ -97,14 +97,14 @@
       </button>
       <button
         class="mui-btn mui-btn--secondary mui-btn--raised"
-        style="padding-left: 0.5em; padding-right: 0.5em"
+        style="padding-left: 0.8em; padding-right: 0.8em"
         onclick="stepForward(true)"
       >
         <i class="fas fa-forward"></i>
       </button>
     </div>
     <script>
-      var MiroEnabled = () => miro && miro.board;
+      var MiroEnabled = true; // () => miro && miro.board;
       var StepNumber = 0;
       const SHARED_STEP = "Step";
 
