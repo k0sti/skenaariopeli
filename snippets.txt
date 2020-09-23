@@ -190,3 +190,18 @@ await miro.board.getOnlineUsers().then(
         }
     )
 );
+
+
+// Get selected widget
+
+let selected = (await miro.board.selection.get())[0];
+
+// Get widget by id
+let widget = (await miro.board.widgets.get({ id: "3074457350081245516" }))[0];
+
+// Create new card beside a given widget
+
+let widget = (await miro.board.widgets.get({ id: "3074457350081245516" }))[0];
+await miro.board.widgets.create([
+    { type: "sticker", text: "Hoplaa", x: widget.x, y:widget.y + 100, scale: 0.5},
+]);
