@@ -292,6 +292,8 @@ Kiitoksia pelistä!
       changeState(StepNumber);
 
       miro.onReady(async () => {
+        console.log("sidebar.initialize");
+        console.log("Miro enabled: "+mirotools.MiroEnabled());
         initialize();
         // Below: Spawn authorization dialog
         /*
@@ -310,7 +312,6 @@ Kiitoksia pelistä!
       });
 
       async function initialize() {
-        console.log("Miro enabled: "+mirotools.MiroEnabled());
         StepNumber = parseInt(await getSharedValue(SHARED_STEP));
         changeState(StepNumber);
 
