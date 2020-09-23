@@ -149,13 +149,16 @@ miro.board.widgets.update([{ id: element.id, metadata: {"${APP_ID}": {myKey: "ho
 
 
 =====
+
+await miro.addListener("SELECTION_UPDATED", (e) => console.log("SELECTION_UPDATED", e))
 await miro.addListener("DATA_BROADCASTED", (e) => console.log("DATA_BROADCASTED"))
 await miro.addListener("WIDGETS_CREATED", (e) => console.log("WIDGETS_CREATED"))
-await miro.addListener("RUNTIME_STATE_UPDATED", (e) => console.log("RUNTIME_STATE_UPDATED"))
 await miro.addListener("COMMENT_CREATED", (e) => console.log("COMMENT_CREATED"))
 await miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (e) => console.log("WIDGETS_TRANSFORMATION_UPDATED"))
 await miro.addListener("ALL_WIDGETS_LOADED", (e) => console.log("ALL_WIDGETS_LOADED"))
 await miro.addListener("WIDGETS_DELETED", (e) => console.log("WIDGETS_DELETED"))
+
+await miro.addListener("RUNTIME_STATE_UPDATED", (e) => console.log("RUNTIME_STATE_UPDATED"))
 
 miro.broadcastData("1234")
 
