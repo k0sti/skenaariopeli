@@ -1,4 +1,4 @@
-parent.mirotools = function() {
+var mirotools = function() {
   let MiroEnabled = () => miro && miro.board ? true : false;
 
   // Get a Miro Sticker to store sync data in
