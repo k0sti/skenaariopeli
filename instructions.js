@@ -11,7 +11,8 @@ Suosittelemme, että ryhmä valitsee aluksi keskuudestaan pelinjohtajan, joka hu
 
 Painakaa <b>Eteenpäin <i class="fas fa-play"></i></b> -nappia kun olette valmiita aloittamaan!
 
-Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit tutustua Miron esittelyvideoon tai harjoitella <b><i class="far fa-sticky-note"></i> tarralappujen</b> vetämistä työkalupakista taululle.
+<h2>Miron käyttö</h2>
+Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit harjoitella <b><i class="far fa-sticky-note"></i> tarralappujen</b> vetämistä työkalupakista taululle.
 
 <iframe width="200" height="150" src="https://www.youtube.com/embed/7L1-0DOGHDY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -23,6 +24,8 @@ Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit tutustua
     cuePoint: true,
     body: `
 Kirjoittakaa aluksi <b>lapulle <i class="far fa-sticky-note"></i></b>, kenen näkökulmasta tulevaisuutta tarkastelette.
+
+Asettakaa lappu taululle kohtaan "Me".
 
 <i>esim. “Yle".</i>
 `,
