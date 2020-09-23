@@ -101,5 +101,3 @@ var mirotools = function() {
     getContainedStickerText
   }
 }();
-
-console.log("Miro enabled: "+mirotools.MiroEnabled());

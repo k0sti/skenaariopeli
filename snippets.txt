@@ -1,0 +1,189 @@
+"hei\nhoi\n\nhai".replace(/^(?!<p>)(.*)(?!<\/p>)$/gm, "<p>$1</p>");
+
+https://github.com/miroapp/app-examples/blob/e6a6b167edad582b9aa4bcb50eb7e6c7d0b00372/miro.d.ts
+
+	type EventType =
+		| 'SELECTION_UPDATED'
+		| 'WIDGETS_CREATED'
+		| 'WIDGETS_DELETED'
+		| 'WIDGETS_TRANSFORMATION_UPDATED'
+		| 'ESC_PRESSED' //Experimental event
+		| 'ALL_WIDGETS_LOADED' //Experimental event
+		| 'COMMENT_CREATED' //Experimental event
+		| 'CANVAS_CLICKED' //Experimental event
+		| 'DATA_BROADCASTED' //Experimental event
+		| 'RUNTIME_STATE_UPDATED' //Experimental event
+		| 'METADATA_CHANGED' //Experimental event
+		| 'ONLINE_USERS_CHANGED' //Experimental event
+
+    
+
+    await miro.board.widgets.get().then(params=>console.log(params[0].metadata))
+
+    await miro.board.widgets.get().then(params=>console.log(params[0]))
+
+// Get a Miro Sticker to store sync data in
+async function getMiroStickerByKey(key) {
+    let searchString = `${key}: `;
+    let elements = await miro.board.widgets.get({
+        type: "sticker"
+    });
+    let element = elements.find(candidate => candidate.plainText.startsWith(searchString));
+    // miro.board.widgets.update([{ id: element.id, clientVisible: false}])
+    return element;
+}
+
+async function getMiroElementByContent(key) {
+    return (await miro.board.widgets.get({plainText: key}))[0];
+}
+
+async function getIntersectedStickers(container) {
+    let stickers = await miro.board.widgets.get({
+        type: "sticker"
+    });
+    let elements = stickers.filter( (sticker) => {
+        if (sticker.bounds.right < container.bounds.left) return false;
+        if (sticker.bounds.left > container.bounds.right) return false;
+        if (sticker.bounds.bottom < container.bounds.top) return false;
+        if (sticker.bounds.top > container.bounds.bottom) return false;
+        return true;
+    });
+    return elements;
+}
+
+// Expect just one sticker
+async function getContainedStickerText(containerContent) {
+    let container = await getMiroElementByContent(containerContent);
+    if (!container) {
+        let response = {
+            success: false,
+            errorMessage: `Aluetta nimeltä ${containerContent} ei löytynyt.`,
+        }
+        console.warn(response.errorMessage);
+        return response;
+    }
+
+    let containedStickers = await getIntersectedStickers(container);
+    if (containedStickers.length < 1) {
+        let response = {
+            success: false,
+            errorMessage: `Yhtään tarralappua ei löytynyt alueella ${container.plainText}`,
+        }
+        console.warn(response.errorMessage);
+        return response;
+    }
+    if (containedStickers.length > 1) {
+        let response = {
+            success: false,
+            errorMessage: `Useita tarralappuja löydettiin alueella ${container.plainText}`,
+        }
+        console.warn(response.errorMessage);
+        return response;
+    }
+    let response = {
+        success: true,
+        value: containedStickers[0].plainText,
+    }
+    return response;
+}
+
+// Fetch value for key from a Miro Sticker
+async function getSharedValue(key) {
+    let element = await getMiroStickerByKey(key);
+    if (element) {
+        return await element.plainText.substring(key.length + 2); // Skip key name and ": "
+    } else {
+        return undefined;
+    }
+}
+
+// Store value for key from a Sticker
+async function setSharedValue(key, value) {
+    let element = await getMiroStickerByKey(key);
+    let text = `${key}: ${value}`;
+    if (element) {
+        await miro.board.widgets.update([{ id: element.id, text: text}]);
+    } else {
+        await miro.board.widgets.create([
+            {type: 'sticker', text: text, /* clientVisible: false, */ }
+        ]);
+    }
+}
+
+await getSharedValue("Step");
+await setSharedValue("Step", "15");
+
+// WORKS & SYNCS FOR ALL USERS
+await miro.board.widgets.update([{ id: element.id, clientVisible: false}])
+await miro.board.widgets.update([{ id: element.id, clientVisible: true}])
+
+// SHOW HIDDEN DATA STICKERS
+var elements = await miro.board.widgets.get({
+    type: "sticker"
+});
+await elements.forEach(element => 
+    miro.board.widgets.update([{ id: element.id, clientVisible: true}]))
+
+
+element = await miro.board.widgets.get({
+    plainText: "Idea 2"
+}).then(elements => elements[0])
+
+// WORKS & SYNCS FOR ALL USERS
+miro.board.widgets.update([{ id: element.id, text: "Idea 2+"}])
+
+// Error: You can write metadata only for your app ID 'DEV_TOOL_CONSOLE_PLUGIN_NAME'. Your key is myKey
+miro.board.widgets.update([{ id: element.id, metadata: {myKey: "hoi"}}])
+
+// WORKS, BUT WON'T SYNC FOR ALL USERS
+var element = await miro.board.widgets.get({
+    plainText: "Idea 2"
+}).then(elements => elements[0])
+// var appId = await miro.getClientId();
+var appId="DEV_TOOL_CONSOLE_PLUGIN_NAME"
+miro.board.widgets.update([{ id: element.id, metadata: {[appId]: {myKey: "hoi"}}}])
+
+====
+miro.board.widgets.update([{ id: element.id, metadata: {"${APP_ID}": {myKey: "hoi"}}}])
+
+
+
+=====
+await miro.addListener("DATA_BROADCASTED", (e) => console.log("DATA_BROADCASTED"))
+await miro.addListener("WIDGETS_CREATED", (e) => console.log("WIDGETS_CREATED"))
+await miro.addListener("RUNTIME_STATE_UPDATED", (e) => console.log("RUNTIME_STATE_UPDATED"))
+await miro.addListener("COMMENT_CREATED", (e) => console.log("COMMENT_CREATED"))
+await miro.addListener("WIDGETS_TRANSFORMATION_UPDATED", (e) => console.log("WIDGETS_TRANSFORMATION_UPDATED"))
+await miro.addListener("ALL_WIDGETS_LOADED", (e) => console.log("ALL_WIDGETS_LOADED"))
+await miro.addListener("WIDGETS_DELETED", (e) => console.log("WIDGETS_DELETED"))
+
+miro.broadcastData("1234")
+
+====
+Plain object observable
+
+https://www.wintellect.com/how-to-implement-the-observer-pattern-with-objects-and-arrays-in-pure-javascript/
+
+====
+let widgets = await miro.board.widgets.create([
+	{type: 'sticker', text: 'I am sticker'}
+]);
+
+let widgets = await miro.board.widgets.create([
+	{type: 'comment', text: 'I am comment'}
+]);
+
+
+// Create an user card with status to ready
+
+var myId = await miro.currentUser.getId();
+await setSharedValue(`users/${myId}`, "ready");
+
+await miro.board.getOnlineUsers().then(
+    users => users.forEach(
+        async user => {
+            var userStatus = await getSharedValue(`users/${user.id}`);
+            console.log(`User ${user.name} status: `+userStatus)
+        }
+    )
+);

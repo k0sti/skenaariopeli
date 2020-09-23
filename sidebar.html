@@ -310,6 +310,7 @@ Kiitoksia pelistä!
       });
 
       async function initialize() {
+        console.log("Miro enabled: "+mirotools.MiroEnabled());
         StepNumber = parseInt(await getSharedValue(SHARED_STEP));
         changeState(StepNumber);
 
