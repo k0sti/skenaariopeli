@@ -22,22 +22,10 @@
         padding: 0;
       }
 
-      .widget-info {
+      .content {
         padding: 20px 24px 8em 24px;
-        height: 100%;
       }
 
-      .editor {
-        width: 310px;
-        height: calc(100% - 120px);
-        border: 1px solid #ccc;
-        padding: 10px;
-        box-sizing: border-box;
-        font-family: Arial;
-        font-size: 14px;
-        margin: 0 -10px;
-        resize: none;
-      }
       .bottom_navi {
         text-align: right;
         background: white;
@@ -56,19 +44,10 @@
   </head>
 
   <body>
-    <!--
-<div class="rtb-sidebar-caption">Extra notes</div>
-<div class="no-selected-widget">
-    Please select one widget <br>to add notes ✏️
-</div>
--->
-    <div class="widget-info">
+    <div class="content">
       <h1 id="step_head"></h1>
       <div id="step_text"></div>
-      <!--
-    <p id="widget-name"></p>
-    <textarea placeholder="Add some notes here. Saves locally" id="editor" class="editor">text word</textarea>
-    --></div>
+    </div>
     <div class="bottom_navi">
       <div style="position: absolute" id="step_number"></div>
       <button
@@ -101,9 +80,10 @@
       </button>
     </div>
     <script>
-      var StepNumber = 0;
       const SHARED_STEP = "Step";
 
+      var StepNumber = 0;
+      var poll;
       var replacements = {
         "{scenario_actor}": "Yle",
         "{scenario_year}": "2030",
@@ -123,8 +103,11 @@
         StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP));
         changeState(StepNumber);
 
-        var poll = setInterval(pollCallback, 2000);
-        // clearInterval(poll)
+        poll = setInterval(pollCallback, 2000);
+      }
+
+      function deInitialize() {
+        clearInterval(poll)
       }
 
       async function stepForward(skipToCue) {
