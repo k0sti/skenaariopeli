@@ -130,27 +130,27 @@
       async function stepForward(skipToCue) {
         let stop = false;
         while (StepNumber < stepData.length - 1 && !stop) {
-          if (mirotools.MiroEnabled()) {
+          if (mirotools.isMiroEnabled()) {
             await onExitState(StepNumber);
           }
           StepNumber++;
           if (!skipToCue || stepData[StepNumber].cuePoint) stop = true;
         }
         changeState(StepNumber);
-        if (mirotools.MiroEnabled()) mirotools.setSharedValue(SHARED_STEP, StepNumber);
+        if (mirotools.isMiroEnabled()) mirotools.setSharedValue(SHARED_STEP, StepNumber);
       }
 
       async function stepBackward(skipToCue) {
         let stop = false;
         while (StepNumber > 0 && !stop) {
-          if (mirotools.MiroEnabled()) {
+          if (mirotools.isMiroEnabled()) {
             await onExitState(StepNumber);
           }
           StepNumber--;
           if (!skipToCue || stepData[StepNumber].cuePoint) stop = true;
         }
         changeState(StepNumber);
-        if (mirotools.MiroEnabled()) mirotools.setSharedValue(SHARED_STEP, StepNumber);
+        if (mirotools.isMiroEnabled()) mirotools.setSharedValue(SHARED_STEP, StepNumber);
       }
 
       function formatPlainText(text) {

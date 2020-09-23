@@ -1,5 +1,6 @@
 var mirotools = function() {
-  let MiroEnabled = () => miro && miro.board ? true : false;
+
+  let isMiroEnabled = () => miro && miro.board ? true : false;
 
   // Get a Miro Sticker to store sync data in
   async function getMiroStickerByKey(key) {
@@ -93,8 +94,9 @@ var mirotools = function() {
 
   // Return the module's public interface accessible via modulename.property
   return {
-    MiroEnabled,
+    isMiroEnabled,
     getMiroStickerByKey,
+    getSharedValue,
     setSharedValue,
     getMiroElementByContent,
     getIntersectedStickers,
