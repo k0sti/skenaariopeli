@@ -3,18 +3,19 @@ const stepData = [
     title: "Tervetuloa Skenaariopeliin!",
     cuePoint: true,
     body: `
-Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
-
 Seuraavan noin 90 minuutin aikana luodaan 2–5 hengen ryhmässä yksi mahdollinen tulevaisuusskenaario ryhmäänne kiinnostavasta aiheesta. Lopuksi joku ryhmästänne kertoo siitä 2 minuutin kiteytetyn tarinan, joka kannattaa tallentaa muistoksi.
+
+<h2>Pelin aloitus ja kulku</h2>
+Pelissä on 6 vaihetta, joissa on muutamia alivaiheita. Tämä ohjepaneeli opastaa pelin läpi.
 
 Suosittelemme, että ryhmä valitsee aluksi keskuudestaan pelinjohtajan, joka huolehtii pelin etenemisestä.
 
-Painakaa <b>Eteenpäin <i class="fas fa-play"></i></b> -nappia kun olette valmiita aloittamaan!
+Kun olette valmiit, aloittakaa peli painamalla <b>Eteenpäin <i class="fas fa-play"></i></b> -nappia. Samasta napista myös siirrytään eteenpäin pelin vaiheissa.
 
-<h2>Miron käyttö</h2>
-Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit harjoitella <b><i class="far fa-sticky-note"></i> tarralappujen</b> vetämistä työkalupakista taululle.
+<h2>Pikaohje Miron käyttöön</h2>
+Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit harjoitella <b><i class="far fa-sticky-note"></i> tarralappujen</b> vetämistä työkalupakista "pelaajien nimet" -taululle.
 
-<iframe width="200" height="150" src="https://www.youtube.com/embed/7L1-0DOGHDY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="100%" height="auto" src="https://www.youtube.com/embed/7L1-0DOGHDY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 `,
   },
@@ -23,6 +24,8 @@ Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit harjoite
     title: "1/6 Me ja skenaarion luonne",
     cuePoint: true,
     body: `
+Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
+
 Kirjoittakaa aluksi <b>lapulle <i class="far fa-sticky-note"></i></b>, kenen näkökulmasta tulevaisuutta tarkastelette.
 
 Asettakaa lappu taululle kohtaan "Me".
@@ -34,7 +37,7 @@ Asettakaa lappu taululle kohtaan "Me".
   {
     title: "1/6 Me ja skenaarion luonne",
     body: `
-Kirjoittakaa kortille <i class="far fa-sticky-note"></i> skenaarionne tarkasteluvuosi.
+Kirjoittakaa toiselle kortille <i class="far fa-sticky-note"></i> skenaarionne tarkasteluvuosi.
 
 <i>esim. "2030" tai "2050"</i>
 `,
