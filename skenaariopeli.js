@@ -1,8 +1,10 @@
 var skenaariopeli = function() {
   const SHARED_STEP = "Step";
+  const SHARED_SEED = "Seed";
   const DEAL_CARD_WIDGET_ID = "3074457350081245516";
 
   var StepNumber = 0;
+  var Seed = 0;
   var Deck = [];
   var poll;
   var namedWidgets = {
@@ -61,7 +63,7 @@ var skenaariopeli = function() {
         await miro.board.widgets.create([{
           type: "sticker",
           text: ilmiöCard.Ilmiö,
-          x: deckWidget.x + Math.random() * 100 - 50,
+          x: deckWidget.x + Math.random() * 100 - 50 + ((Seed % 3) - 1) * 200,
           y: deckWidget.y + Math.random() * 20 + 100,
           scale: 0.5,
           style: {
@@ -70,6 +72,8 @@ var skenaariopeli = function() {
         }]);
         // Clear selection
         miro.board.selection.selectWidgets([]);
+        Seed++;
+        mirotools.setSharedValue(SHARED_SEED, Seed);
       }
     }
   }
@@ -118,6 +122,7 @@ var skenaariopeli = function() {
       StepNumber = sharedState;
       onEnterState(StepNumber);
     }
+    Seed = parseInt(await mirotools.getSharedValue(SHARED_SEED));
   }
 
   async function onEnterState(stepNumber) {
