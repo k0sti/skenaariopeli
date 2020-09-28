@@ -1,6 +1,8 @@
 const stepData = [
   {
     title: "Tervetuloa Skenaariopeliin!",
+    id: "Frame0",
+    focus: "Frame0",
     cuePoint: true,
     body: `
 Seuraavan noin 90 minuutin aikana luodaan 2–5 hengen ryhmässä yksi mahdollinen tulevaisuusskenaario ryhmäänne kiinnostavasta aiheesta. Lopuksi joku ryhmästänne kertoo siitä 2 minuutin kiteytetyn tarinan, joka kannattaa tallentaa muistoksi.
@@ -24,7 +26,7 @@ Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit harjoite
     title: "1/6 Me ja skenaarion luonne",
     cuePoint: true,
     id: "Frame1",
-    focus: "Frame1Area1",
+    focus: "Frame1",
     body: `
 Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
 
@@ -38,7 +40,6 @@ Asettakaa lappu taululle kohtaan "Me".
 
   {
     title: "1/6 Me ja skenaarion luonne",
-    focus: "Frame1Area2",
     body: `
 Kirjoittakaa toiselle kortille <i class="far fa-sticky-note"></i> skenaarionne tarkasteluvuosi.
 
@@ -48,7 +49,6 @@ Kirjoittakaa toiselle kortille <i class="far fa-sticky-note"></i> skenaarionne t
 
   {
     title: "1/6 Me ja skenaarion luonne",
-    focus: "Frame1Area3",
     body: `
 Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen skenaarion laaditte.
 
