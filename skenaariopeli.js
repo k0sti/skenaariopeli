@@ -3,6 +3,7 @@ var skenaariopeli = function() {
   const DEAL_CARD_WIDGET_ID = "3074457350081245516";
 
   var StepNumber = 0;
+  var Deck = [];
   var poll;
   var replacements = {
     "{scenario_actor}": "Yle",
@@ -26,6 +27,20 @@ var skenaariopeli = function() {
     clearInterval(poll)
   }
 
+  function shuffleIlmiöt() {
+    Deck = ilmiöt.filter(ilmiö => ilmiö.Gen);
+    Deck.sort(function (a, b) { return 0.5 - Math.random() });
+    console.log(Deck[0].Ilmiö)
+  }
+
+  function popIlmiö() {
+    if (Deck.length > 0) {
+      return Deck.shift();
+    }
+    shuffleIlmiöt();
+    return Deck.shift();
+  }
+
   async function onMiroSelectionChange(e) {
     let widgets = e.data;
     if (widgets.length === 1) {
@@ -33,9 +48,10 @@ var skenaariopeli = function() {
       if (widget.id === DEAL_CARD_WIDGET_ID) {
         console.log("DEAL CARD!");
         let deckWidget = (await miro.board.widgets.get({ id: DEAL_CARD_WIDGET_ID }))[0];
+        let ilmiöCard = popIlmiö();
         await miro.board.widgets.create([{
           type: "sticker",
-          text: "Hoplaa",
+          text: ilmiöCard.Ilmiö,
           x: deckWidget.x + Math.random() * 100 - 50,
           y: deckWidget.y + Math.random() * 20 + 100,
           scale: 0.5},
@@ -90,7 +106,6 @@ var skenaariopeli = function() {
   function changeState(stateId) {
     var stateData = stepData[stateId];
 
-    document.getElementById("step_number").innerHTML = StepNumber;
     document.getElementById("step_head").innerHTML = formatPlainText(
       stateData.title
     );
