@@ -63,8 +63,11 @@ var skenaariopeli = function() {
           text: ilmiöCard.Ilmiö,
           x: deckWidget.x + Math.random() * 100 - 50,
           y: deckWidget.y + Math.random() * 20 + 100,
-          scale: 0.5},
-        ]);
+          scale: 0.5,
+          style: {
+            stickerType: 1,
+          }
+        }]);
         // Clear selection
         miro.board.selection.selectWidgets([]);
       }
