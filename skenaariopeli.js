@@ -34,10 +34,9 @@ var skenaariopeli = function() {
   }
 
   function popIlmiö() {
-    if (Deck.length > 0) {
-      return Deck.shift();
+    if (Deck.length == 0) {
+      shuffleIlmiöt();
     }
-    shuffleIlmiöt();
     return Deck.shift();
   }
 
