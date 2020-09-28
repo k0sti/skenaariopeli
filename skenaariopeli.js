@@ -6,7 +6,14 @@ var skenaariopeli = function() {
   var Deck = [];
   var poll;
   var namedWidgets = {
+    "Frame1Area1": "3074457349955055929",
+    "Frame1Area2": "3074457349955055930",
+    "Frame1Area3": "3074457350201308677",
+    "Frame0": "3074457349957558594",
     "Frame1": "3074457349955055983",
+    "Frame2": "3074457349955055980",
+    "Frame3": "3074457349955055981",
+    "Frame4": "3074457349955055982",
   };
 
   var replacements = {

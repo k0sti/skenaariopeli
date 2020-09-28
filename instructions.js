@@ -24,7 +24,7 @@ Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit harjoite
     title: "1/6 Me ja skenaarion luonne",
     cuePoint: true,
     id: "Frame1",
-    focus: "Frame1",
+    focus: "Frame1Area1",
     body: `
 Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
 
@@ -38,6 +38,7 @@ Asettakaa lappu taululle kohtaan "Me".
 
   {
     title: "1/6 Me ja skenaarion luonne",
+    focus: "Frame1Area2",
     body: `
 Kirjoittakaa toiselle kortille <i class="far fa-sticky-note"></i> skenaarionne tarkasteluvuosi.
 
@@ -47,6 +48,7 @@ Kirjoittakaa toiselle kortille <i class="far fa-sticky-note"></i> skenaarionne t
 
   {
     title: "1/6 Me ja skenaarion luonne",
+    focus: "Frame1Area3",
     body: `
 Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen skenaarion laaditte.
 
@@ -73,6 +75,7 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
 
   {
     title: "3/6 {scenario_actor} vuonna {scenario_year}",
+    focus: "Frame3",
     cuePoint: true,
     body: `
 <b><i class="far fa-sticky-note"></i> Kirjoita</b> omalle kortille yksi olennainen ominaisuus, jolla {scenario_actor} on sopeutunut vuoden {scenario_year} maailmaan.
@@ -102,6 +105,7 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
 
   {
     title: "4/6 Miten tähän päädyttiin?",
+    focus: "Frame4",
     cuePoint: true,
     body: `
 Eletään vuotta {scenario_year}. Seuraavaksi muistellaan, mitkä aiemmat tapahtumat ovat johtaneet siihen, millainen {scenario_actor} on nyt.
