@@ -23,6 +23,8 @@ Pelissä käytetään Miron virtuaalisia tarralappuja. Odotellessa voit harjoite
   {
     title: "1/6 Me ja skenaarion luonne",
     cuePoint: true,
+    id: "Frame1",
+    focus: "Frame1",
     body: `
 Skenaariopelissä ryhmällenne on annettu kaikki valta luotsata itsenne seuraavien vuosien tai vuosikymmenten halki.
 
@@ -54,6 +56,8 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
 
   {
     title: "2/6 Maailma vuonna {scenario_year}",
+    id: "Frame2",
+    focus: "Frame2",
     cuePoint: true,
     body: `
 

@@ -5,6 +5,10 @@ var skenaariopeli = function() {
   var StepNumber = 0;
   var Deck = [];
   var poll;
+  var namedWidgets = {
+    "Frame1": "3074457349955055983",
+  };
+
   var replacements = {
     "{scenario_actor}": "Yle",
     "{scenario_year}": "2030",
@@ -17,7 +21,7 @@ var skenaariopeli = function() {
   async function initialize() {
     console.log("skenaariopeli.initialize");
     StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP));
-    changeState(StepNumber);
+    onEnterState(StepNumber);
 
     poll = setInterval(pollCallback, 2000);
     await miro.addListener("SELECTION_UPDATED", (e) => onMiroSelectionChange(e))
@@ -61,28 +65,24 @@ var skenaariopeli = function() {
   }
 
   async function stepForward(skipToCue) {
+    await onExitState(StepNumber);
     let stop = false;
     while (StepNumber < stepData.length - 1 && !stop) {
-      if (mirotools.isMiroEnabled()) {
-        await onExitState(StepNumber);
-      }
       StepNumber++;
       if (!skipToCue || stepData[StepNumber].cuePoint) stop = true;
     }
-    changeState(StepNumber);
+    await onEnterState(StepNumber);
     if (mirotools.isMiroEnabled()) mirotools.setSharedValue(SHARED_STEP, StepNumber);
   }
 
   async function stepBackward(skipToCue) {
+    await onExitState(StepNumber);
     let stop = false;
     while (StepNumber > 0 && !stop) {
-      if (mirotools.isMiroEnabled()) {
-        await onExitState(StepNumber);
-      }
       StepNumber--;
       if (!skipToCue || stepData[StepNumber].cuePoint) stop = true;
     }
-    changeState(StepNumber);
+    await onEnterState(StepNumber);
     if (mirotools.isMiroEnabled()) mirotools.setSharedValue(SHARED_STEP, StepNumber);
   }
 
@@ -101,17 +101,6 @@ var skenaariopeli = function() {
     return formattedText;
   }
 
-  function changeState(stateId) {
-    var stateData = stepData[stateId];
-
-    document.getElementById("step_head").innerHTML = formatPlainText(
-      stateData.title
-    );
-    document.getElementById("step_text").innerHTML = formatPlainText(
-      stateData.body
-    );
-  }
-
   async function pollCallback() {
     let sharedState = parseInt(await mirotools.getSharedValue(SHARED_STEP));
     if (StepNumber != sharedState) {
@@ -120,27 +109,57 @@ var skenaariopeli = function() {
     }
   }
 
-  async function onExitState(state) {
-    let actorResponse = await mirotools.getContainedStickerText(
-      "SCENARIO_ACTOR_CONTAINER"
+  async function onEnterState(stepNumber) {
+    var stateData = stepData[stepNumber];
+
+    document.getElementById("step_head").innerHTML = formatPlainText(
+      stateData.title
     );
-    if (actorResponse.success) {
-      replacements["{scenario_actor}"] = actorResponse.value;
-    }
-    let yearResponse = await mirotools.getContainedStickerText(
-      "SCENARIO_YEAR_CONTAINER"
+    document.getElementById("step_text").innerHTML = formatPlainText(
+      stateData.body
     );
-    if (yearResponse.success) {
-      replacements["{scenario_year}"] = yearResponse.value;
+
+    // Miro specifics below
+    if (!mirotools.isMiroEnabled()) return;
+
+    if (stateData.focus) {
+      let widget = (await miro.board.widgets.get({ id: namedWidgets[stateData.focus] }))[0];
+      miro.board.viewport.zoomToObject(widget.id)
     }
-    console.log("Actor: " + actorResponse.value);
-    console.log("Year: " + yearResponse.value);
+
+    switch(stateData.id) {
+      case "Frame2": {
+        let actorResponse = await mirotools.getContainedStickerText(
+          "SCENARIO_ACTOR_CONTAINER"
+        );
+        if (actorResponse.success) {
+          replacements["{scenario_actor}"] = actorResponse.value;
+        }
+        let yearResponse = await mirotools.getContainedStickerText(
+          "SCENARIO_YEAR_CONTAINER"
+        );
+        if (yearResponse.success) {
+          replacements["{scenario_year}"] = yearResponse.value;
+        }
+      }
+    }
+
+  }
+
+  async function onExitState(stepNumber) {
+    var stateData = stepData[stepNumber];
+
+    if (!mirotools.isMiroEnabled()) return;
+    // Miro specifics below
+
+    switch(stateData.id) {
+    }
   }
 
   return {
     initialize,
     deInitialize,
-    changeState,
+    onEnterState,
     stepForward,
     stepBackward,
   }

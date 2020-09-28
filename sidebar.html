@@ -86,7 +86,7 @@
     </div>
     <script>
       // Initialization for non-Miro environment
-      if (!mirotools.isMiroEnabled()) skenaariopeli.changeState(0);
+      if (!mirotools.isMiroEnabled()) skenaariopeli.onEnterState(0);
 
       miro.onReady(async () => {
         skenaariopeli.initialize();
