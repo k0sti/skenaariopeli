@@ -1,13 +1,13 @@
 var skenaariopeli = function() {
   const SHARED_STEP = "Step";
   const SHARED_SEED = "Seed";
-  const DEAL_CARD_WIDGET_ID = "3074457350081245516";
 
   var StepNumber = 0;
   var Seed = 0;
   var Deck = [];
   var poll;
   var namedWidgets = {
+    "DealButton": "3074457350081245516",
     "Frame1Area1": "3074457349955055929",
     "Frame1Area2": "3074457349955055930",
     "Frame1Area3": "3074457350201308677",
@@ -56,9 +56,9 @@ var skenaariopeli = function() {
     let widgets = e.data;
     if (widgets.length === 1) {
       let widget = widgets[0];
-      if (widget.id === DEAL_CARD_WIDGET_ID) {
+      if (widget.id === namedWidgets.DealButton) {
         console.log("DEAL CARD!");
-        let deckWidget = (await miro.board.widgets.get({ id: DEAL_CARD_WIDGET_ID }))[0];
+        let deckWidget = (await miro.board.widgets.get({ id: namedWidgets.DealButton }))[0];
         let ilmiöCard = popIlmiö();
         await miro.board.widgets.create([{
           type: "sticker",
