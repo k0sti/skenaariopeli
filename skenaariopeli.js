@@ -136,6 +136,34 @@ var skenaariopeli = function() {
   async function onEnterState(stepNumber) {
     var stateData = stepData[stepNumber];
 
+    if (mirotools.isMiroEnabled()) {
+      // Handle Miro board focus
+      if (stateData.focus) {
+        let widget = (await miro.board.widgets.get({ id: namedWidgets[stateData.focus] }))[0];
+        miro.board.viewport.zoomToObject(widget.id)
+      }
+
+      if (stateData.id) {
+        switch(stateData.id) {
+          case "Frame2": {
+            let actorResponse = await mirotools.getContainedStickerText(
+              "SCENARIO_ACTOR_CONTAINER"
+            );
+            if (actorResponse.success) {
+              replacements["{scenario_actor}"] = actorResponse.value;
+            }
+            let yearResponse = await mirotools.getContainedStickerText(
+              "SCENARIO_YEAR_CONTAINER"
+            );
+            if (yearResponse.success) {
+              replacements["{scenario_year}"] = yearResponse.value;
+            }
+          }
+        }
+      }
+    }
+
+    // Change sidebar content
     document.getElementById("step_head").innerHTML = formatPlainText(
       stateData.title
     );
@@ -143,43 +171,15 @@ var skenaariopeli = function() {
       stateData.body
     );
 
-    // Miro specifics below
-    if (!mirotools.isMiroEnabled()) return;
-
-    if (stateData.focus) {
-      let widget = (await miro.board.widgets.get({ id: namedWidgets[stateData.focus] }))[0];
-      miro.board.viewport.zoomToObject(widget.id)
-    }
-
-    if (stateData.id) {
-      switch(stateData.id) {
-        case "Frame2": {
-          let actorResponse = await mirotools.getContainedStickerText(
-            "SCENARIO_ACTOR_CONTAINER"
-          );
-          if (actorResponse.success) {
-            replacements["{scenario_actor}"] = actorResponse.value;
-          }
-          let yearResponse = await mirotools.getContainedStickerText(
-            "SCENARIO_YEAR_CONTAINER"
-          );
-          if (yearResponse.success) {
-            replacements["{scenario_year}"] = yearResponse.value;
-          }
-        }
-      }
-    }
-
   }
 
   async function onExitState(stepNumber) {
     var stateData = stepData[stepNumber];
 
-    if (!mirotools.isMiroEnabled()) return;
-    // Miro specifics below
-
-    if (stateData.id) {
-      switch(stateData.id) {
+    if (mirotools.isMiroEnabled()) {
+      if (stateData.id) {
+        switch(stateData.id) {
+        }
       }
     }
   }
