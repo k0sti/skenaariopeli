@@ -1,9 +1,9 @@
 const stepData = [
   {
     title: "Tervetuloa Skenaariopeliin!",
+    cuePoint: true,
     id: "Frame0",
     focus: "Frame0",
-    cuePoint: true,
     body: `
 Seuraavan noin 90 minuutin aikana luodaan 2–5 hengen ryhmässä yksi mahdollinen tulevaisuusskenaario ryhmäänne kiinnostavasta aiheesta. Lopuksi joku ryhmästänne kertoo siitä 2 minuutin kiteytetyn tarinan, joka kannattaa tallentaa muistoksi.
 
@@ -58,9 +58,9 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
 
   {
     title: "2/6 Maailma vuonna {scenario_year}",
+    cuePoint: true,
     id: "Frame2",
     focus: "Frame2",
-    cuePoint: true,
     body: `
 
 <b>Tutustu</b> hetki pöydällä oleviin, tulevaisuutta muokkaaviin ilmiöihin.
@@ -75,8 +75,8 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
 
   {
     title: "3/6 {scenario_actor} vuonna {scenario_year}",
-    focus: "Frame3",
     cuePoint: true,
+    focus: "Frame3",
     body: `
 <b><i class="far fa-sticky-note"></i> Kirjoita</b> omalle kortille yksi olennainen ominaisuus, jolla {scenario_actor} on sopeutunut vuoden {scenario_year} maailmaan.
 <i>Aloita vaikkapa "{scenario_actor} on..."</i>
@@ -105,8 +105,8 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
 
   {
     title: "4/6 Miten tähän päädyttiin?",
-    focus: "Frame4",
     cuePoint: true,
+    focus: "Frame4",
     body: `
 Eletään vuotta {scenario_year}. Seuraavaksi muistellaan, mitkä aiemmat tapahtumat ovat johtaneet siihen, millainen {scenario_actor} on nyt.
 
