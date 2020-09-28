@@ -63,8 +63,8 @@ var skenaariopeli = function() {
         await miro.board.widgets.create([{
           type: "sticker",
           text: ilmiöCard.Ilmiö,
-          x: deckWidget.x + Math.random() * 100 - 50 + ((Seed % 3) - 1) * 200,
-          y: deckWidget.y + Math.random() * 20 + 100,
+          x: deckWidget.x + Math.random() * 20 - 10 + ((Seed % 3) - 1) * 200,
+          y: deckWidget.y + Math.random() * 20 + 120,
           scale: 0.5,
           style: {
             stickerType: 1,
@@ -79,25 +79,35 @@ var skenaariopeli = function() {
   }
 
   async function stepForward(skipToCue) {
-    await onExitState(StepNumber);
+    let destinationStep = StepNumber;
     let stop = false;
-    while (StepNumber < stepData.length - 1 && !stop) {
-      StepNumber++;
-      if (!skipToCue || stepData[StepNumber].cuePoint) stop = true;
+    while (destinationStep < stepData.length - 1 && !stop) {
+      destinationStep++;
+      if (!skipToCue || stepData[destinationStep].cuePoint) stop = true;
     }
-    await onEnterState(StepNumber);
-    if (mirotools.isMiroEnabled()) mirotools.setSharedValue(SHARED_STEP, StepNumber);
+    if (mirotools.isMiroEnabled()) mirotools.setSharedValue(SHARED_STEP, destinationStep);
+    seekStep(destinationStep);
   }
 
   async function stepBackward(skipToCue) {
-    await onExitState(StepNumber);
+    let destinationStep = StepNumber;
     let stop = false;
-    while (StepNumber > 0 && !stop) {
-      StepNumber--;
-      if (!skipToCue || stepData[StepNumber].cuePoint) stop = true;
+    while (destinationStep > 0 && !stop) {
+      destinationStep--;
+      if (!skipToCue || stepData[destinationStep].cuePoint) stop = true;
     }
-    await onEnterState(StepNumber);
-    if (mirotools.isMiroEnabled()) mirotools.setSharedValue(SHARED_STEP, StepNumber);
+    if (mirotools.isMiroEnabled()) mirotools.setSharedValue(SHARED_STEP, destinationStep);
+    seekStep(destinationStep);
+  }
+
+  async function seekStep(destinationStep) {
+    if (StepNumber === destinationStep) return;
+    let delta = Math.sign(destinationStep - StepNumber);
+    do {
+      await onExitState(StepNumber);
+      StepNumber += delta;
+      await onEnterState(StepNumber);
+    } while (StepNumber !== destinationStep);
   }
 
   function formatPlainText(text) {
@@ -116,11 +126,9 @@ var skenaariopeli = function() {
   }
 
   async function pollCallback() {
-    let sharedState = parseInt(await mirotools.getSharedValue(SHARED_STEP));
-    if (StepNumber != sharedState) {
-      onExitState(StepNumber);
-      StepNumber = sharedState;
-      onEnterState(StepNumber);
+    let destinationStep = parseInt(await mirotools.getSharedValue(SHARED_STEP));
+    if (StepNumber != destinationStep) {
+      seekStep(destinationStep);
     }
     Seed = parseInt(await mirotools.getSharedValue(SHARED_SEED));
   }
