@@ -111,8 +111,9 @@ var skenaariopeli = function() {
   async function pollCallback() {
     let sharedState = parseInt(await mirotools.getSharedValue(SHARED_STEP));
     if (StepNumber != sharedState) {
+      onExitState(StepNumber);
       StepNumber = sharedState;
-      changeState(StepNumber);
+      onEnterState(StepNumber);
     }
   }
 
@@ -134,19 +135,21 @@ var skenaariopeli = function() {
       miro.board.viewport.zoomToObject(widget.id)
     }
 
-    switch(stateData.id) {
-      case "Frame2": {
-        let actorResponse = await mirotools.getContainedStickerText(
-          "SCENARIO_ACTOR_CONTAINER"
-        );
-        if (actorResponse.success) {
-          replacements["{scenario_actor}"] = actorResponse.value;
-        }
-        let yearResponse = await mirotools.getContainedStickerText(
-          "SCENARIO_YEAR_CONTAINER"
-        );
-        if (yearResponse.success) {
-          replacements["{scenario_year}"] = yearResponse.value;
+    if (stateData.id) {
+      switch(stateData.id) {
+        case "Frame2": {
+          let actorResponse = await mirotools.getContainedStickerText(
+            "SCENARIO_ACTOR_CONTAINER"
+          );
+          if (actorResponse.success) {
+            replacements["{scenario_actor}"] = actorResponse.value;
+          }
+          let yearResponse = await mirotools.getContainedStickerText(
+            "SCENARIO_YEAR_CONTAINER"
+          );
+          if (yearResponse.success) {
+            replacements["{scenario_year}"] = yearResponse.value;
+          }
         }
       }
     }
@@ -159,7 +162,9 @@ var skenaariopeli = function() {
     if (!mirotools.isMiroEnabled()) return;
     // Miro specifics below
 
-    switch(stateData.id) {
+    if (stateData.id) {
+      switch(stateData.id) {
+      }
     }
   }
 
