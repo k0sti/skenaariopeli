@@ -32,10 +32,11 @@ var skenaariopeli = function() {
   async function initialize() {
     console.log("skenaariopeli.initialize");
     StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP));
+
     let j = await mirotools.getSharedValue(SHARED_NAMED_WIDGETS);
-    console.log(j);
-    namedWidgets = JSON.parse(j);
-    console.log(namedWidgets);
+    if (j) namedWidgets = JSON.parse(j);
+    boardbuilder.build();
+
     onEnterState(StepNumber);
 
     poll = setInterval(pollCallback, 2000);
@@ -196,5 +197,6 @@ var skenaariopeli = function() {
     onEnterState,
     stepForward,
     stepBackward,
+    namedWidgets,
   }
 }();

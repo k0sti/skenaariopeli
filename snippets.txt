@@ -205,3 +205,24 @@ let widget = (await miro.board.widgets.get({ id: "3074457350081245516" }))[0];
 await miro.board.widgets.create([
     { type: "sticker", text: "Hoplaa", x: widget.x, y:widget.y + 100, scale: 0.5},
 ]);
+
+// card with metadata
+await miro.board.widgets.create([
+    { type: "sticker", text: "Hoplaa", x: widget.x, y:widget.y + 100, scale: 0.5,
+        metadata: {
+            DEV_TOOL_CONSOLE_PLUGIN_NAME: {
+                skenaariopeli_id: "hoi"
+            }
+        }
+    },
+]);
+
+miro.board.widgets.update([{ id: element.id, metadata: {myKey: "hoi"}}])
+
+
+// Copy selected snippet to clipboard
+let selected = (await miro.board.selection.get())[0];
+copy(JSON.stringify(selected));
+
+// Copy FRAME properties
+copy(JSON.stringify({type: w.type, x:w.x, y:w.y, width:w.width, height:w.height, style: w.style, title: w.title}));
