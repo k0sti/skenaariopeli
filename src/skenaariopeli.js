@@ -199,6 +199,7 @@ var skenaariopeli = function() {
     onEnterState,
     stepForward,
     stepBackward,
-    namedWidgets,
+    getNamedWidgets = () => namedWidgets,
+    setNamedWidgets = (w) => {namedWidgets = w},
   }
 }();
