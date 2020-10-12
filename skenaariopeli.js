@@ -1,12 +1,14 @@
 var skenaariopeli = function() {
   const SHARED_STEP = "Step";
   const SHARED_SEED = "Seed";
+  const SHARED_NAMED_WIDGETS = "NamedWidgets";
 
   var StepNumber = 0;
   var Seed = 0;
   var Deck = [];
   var poll;
-  var namedWidgets = {
+  var namedWidgets = {};
+/*
     "DealButton": "3074457350081245516",
     "Frame1Area1": "3074457349955055929",
     "Frame1Area2": "3074457349955055930",
@@ -17,7 +19,7 @@ var skenaariopeli = function() {
     "Frame3": "3074457349955055981",
     "Frame4": "3074457349955055982",
   };
-
+*/
   var replacements = {
     "{scenario_actor}": "Yle",
     "{scenario_year}": "2030",
@@ -30,6 +32,7 @@ var skenaariopeli = function() {
   async function initialize() {
     console.log("skenaariopeli.initialize");
     StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP));
+    namedWidgets = JSON.parse(await mirotools.getSharedValue(SHARED_NAMED_WIDGETS));
     onEnterState(StepNumber);
 
     poll = setInterval(pollCallback, 2000);
