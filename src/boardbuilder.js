@@ -2,19 +2,17 @@ var boardbuilder = function() {
 
   const SHARED_NAMED_WIDGETS = "NamedWidgets";
 
-  var nv;
+  var nw;
   var WidgetsModified = false;
 
   async function build() {
+    WidgetsModified = false;
+
     let j = await mirotools.getSharedValue(SHARED_NAMED_WIDGETS);
     console.log(j);
-    if (j) namedWidgets = await JSON.parse(j);
-    console.log(namedWidgets);
-
-    WidgetsModified = false;
-    nw = skenaariopeli.getNamedWidgets();
-    console.log("From boardbuilder");
+    if (j) nw = await JSON.parse(j);
     console.log(nw);
+
     if (await verifyWidget("Frame0")) {
       addWidget("Frame0", await createFrame());
     }
