@@ -13,7 +13,7 @@ var boardbuilder = function() {
     if (j) NamedWidgets = await JSON.parse(j);
     console.log(NamedWidgets);
 
-    if (await verifyWidget("Frame0")) {
+    if (!await verifyWidget("Frame0")) {
       addWidget("Frame0", await createFrame());
     }
 
