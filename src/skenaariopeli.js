@@ -34,7 +34,9 @@ var skenaariopeli = function() {
     StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP));
 
     let j = await mirotools.getSharedValue(SHARED_NAMED_WIDGETS);
+    console.log(j);
     if (j) namedWidgets = await JSON.parse(j);
+    console.log(namedWidgets);
     boardbuilder.build();
 
     onEnterState(StepNumber);
