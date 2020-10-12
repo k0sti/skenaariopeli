@@ -2,7 +2,7 @@ var boardbuilder = function() {
 
   const SHARED_NAMED_WIDGETS = "NamedWidgets";
 
-  var nw;
+  var NamedWidgets;
   var WidgetsModified = false;
 
   async function build() {
@@ -10,22 +10,22 @@ var boardbuilder = function() {
 
     let j = await mirotools.getSharedValue(SHARED_NAMED_WIDGETS);
     console.log(j);
-    if (j) nw = await JSON.parse(j);
-    console.log(nw);
+    if (j) NamedWidgets = await JSON.parse(j);
+    console.log(NamedWidgets);
 
     if (await verifyWidget("Frame0")) {
       addWidget("Frame0", await createFrame());
     }
 
     if (WidgetsModified) {
-      await mirotools.setSharedValue(SHARED_NAMED_WIDGETS, JSON.stringify(nw));
+      await mirotools.setSharedValue(SHARED_NAMED_WIDGETS, JSON.stringify(NamedWidgets));
     }
 
-    skenaariopeli.setNamedWidgets(nw);
+    skenaariopeli.setNamedWidgets(NamedWidgets);
   }
 
   async function verifyWidget(widgetName) {
-    if (nv.widgetName) {
+    if (NamedWidgets.widgetName) {
       console.log(`Found ${widgetName}`)
       return true;
     }
@@ -34,7 +34,7 @@ var boardbuilder = function() {
   }
 
   function addWidget(widgetName, w) {
-    nv[widgetName] = w;
+    NamedWidgets[widgetName] = w;
     WidgetsModified = true;
   }
 
