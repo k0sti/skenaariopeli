@@ -2,6 +2,8 @@ var boardbuilder = function() {
 
   async function build() {
     let nw = skenaariopeli.namedWidgets;
+    console.log("From boardbuilder");
+    console.log(nw);
     if (await verifyWidget(nw.Frame0)) {
       
     }
