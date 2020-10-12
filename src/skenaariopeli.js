@@ -1,7 +1,6 @@
 var skenaariopeli = function() {
   const SHARED_STEP = "Step";
   const SHARED_SEED = "Seed";
-  const SHARED_NAMED_WIDGETS = "NamedWidgets";
 
   var StepNumber = 0;
   var Seed = 0;
@@ -33,10 +32,6 @@ var skenaariopeli = function() {
     console.log("skenaariopeli.initialize");
     StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP));
 
-    let j = await mirotools.getSharedValue(SHARED_NAMED_WIDGETS);
-    console.log(j);
-    if (j) namedWidgets = await JSON.parse(j);
-    console.log(namedWidgets);
     await boardbuilder.build();
 
     onEnterState(StepNumber);
