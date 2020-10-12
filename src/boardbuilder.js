@@ -25,7 +25,7 @@ var boardbuilder = function() {
   }
 
   async function verifyWidget(widgetName) {
-    if (NamedWidgets.widgetName) {
+    if (NamedWidgets[widgetName]) {
       console.log(`Found ${widgetName}`)
       return true;
     }
