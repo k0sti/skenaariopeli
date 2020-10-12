@@ -37,7 +37,7 @@ var skenaariopeli = function() {
     console.log(j);
     if (j) namedWidgets = await JSON.parse(j);
     console.log(namedWidgets);
-    boardbuilder.build();
+    await boardbuilder.build();
 
     onEnterState(StepNumber);
 
