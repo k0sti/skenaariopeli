@@ -26,8 +26,11 @@ var boardbuilder = function() {
 
   async function verifyWidget(widgetName) {
     if (NamedWidgets[widgetName]) {
-      console.log(`Found ${widgetName}`)
-      return true;
+      let widget = (await miro.board.widgets.get({ id: NamedWidgets[widgetName] }))[0];
+      if (widget) {
+        console.log(`Found ${widgetName}`)
+        return true;
+      }
     }
     console.log(`Not found ${widgetName}`)
     return false;
