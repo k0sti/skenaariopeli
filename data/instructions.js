@@ -63,9 +63,11 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
     focus: "Frame2",
     body: `
 
-<b>Tutustu</b> hetki pöydällä oleviin, tulevaisuutta muokkaaviin ilmiöihin.
+<b>Napsauttakaa</b> <i>ilmiökorttipakkaa</i> ja taululle jaetaan 3 satunnaista tulevaisuutta muokkaavaa ilmiötä.
 
-<b><i class="fas fa-mouse-pointer"></i> Osoita</b> sitten ilmiötä, joka on ollut vaikuttavin vuoden {scenario_year} maailmassa.
+<b>Tutustukaa</b> hetki niihin.
+
+<b><i class="fas fa-mouse-pointer"></i> Osoita</b> sitten ilmiötä, joka on mielestäsi vaikuttavin vuoden {scenario_year} maailmassa. Voit myös olla valitsematta mitään.
 
 <b>Siivotkaa</b> pöydältä ne ilmiöt, jotka eivät tulleet valituksi.
 
@@ -78,28 +80,28 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
     cuePoint: true,
     focus: "Frame3",
     body: `
-<b><i class="far fa-sticky-note"></i> Kirjoita</b> omalle kortille yksi olennainen ominaisuus, jolla {scenario_actor} on sopeutunut vuoden {scenario_year} maailmaan.
-<i>Aloita vaikkapa "{scenario_actor} on..."</i>
+<b><i class="far fa-sticky-note"></i> Kirjoita</b> omalle kortille lyhyt kuvaus siitä, miten ryhmänne {scenario_actor} on sopeutunut vuoden {scenario_year} maailmaan.
+<i>Voit jatkaa virkettä "Vuonna {scenario_year} {scenario_actor}..."</i>
 
-<b>Esitelkää</b> vuorollanne omat ehdotuksenne muille.
+<b>Esitelkää</b> vuorollanne omat kuvauksenne muille.
 `,
   },
 
   {
     title: "3/6 {scenario_actor} vuonna {scenario_year}",
     body: `
-<b><i class="far fa-sticky-note"></i> Kirjoita</b> uudelle kortille vielä yksi lisäominaisuus. Voit yhdistellä tai kehitellä jotain ehdotettua ominaisuutta!
+<b><i class="far fa-sticky-note"></i> Kirjoita</b> uudelle kortille toinen lyhyt kuvaus ryhmästänne vuonna {scenario_year}. Voit myös kehitellä jotain jo ehdotettua kuvausta eteenpäin!
 
-<b>Esitelkää</b> vuorollanne myös nämä ehdotukset.
+<b>Esitelkää</b> vuorollanne myös nämä kuvaukset.
 `,
   },
 
   {
     title: "3/6 {scenario_actor} vuonna {scenario_year}",
     body: `
-<b><i class="fas fa-mouse-pointer"></i> Osoita</b> ominaisuutta, joka on mielestäsi olennaisin ja skenaarion luonteen mukainen.
+<b><i class="fas fa-mouse-pointer"></i> Osoita</b> kuvausta, joka on mielestäsi olennaisin ja skenaarion luonteen mukainen.
 
-<b>Keskustelkaa</b> valinnoista ja jättäkää pöydälle 3 ominaisuutta. Muokatkaa ja yhdistäkää ominaisuuksia tarvittaessa.
+<b>Keskustelkaa</b> valinnoista ja jättäkää pöydälle 3 kuvausta. Muokatkaa ja yhdistäkää tarvittaessa.
 `,
   },
 
