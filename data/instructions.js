@@ -63,15 +63,15 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
     focus: "Frame2",
     body: `
 
-<b>Napsauttakaa</b> <i>ilmiökorttipakkaa</i> ja taululle jaetaan 3 satunnaista tulevaisuutta muokkaavaa ilmiötä.
+<b>Jakakaa</b> taululle 3 satunnaista muutosvoimaa napauttamalla ilmiökorttipakkaa.
 
-<b>Tutustukaa</b> hetki niihin.
+<b>Tutustukaa</b> hetki niihin ja päätä vaikuttavin muutosvoima vuoden {scenario_year} maailmassa.
 
-<b><i class="fas fa-mouse-pointer"></i> Osoita</b> sitten ilmiötä, joka on mielestäsi vaikuttavin vuoden {scenario_year} maailmassa. Voit myös olla valitsematta mitään.
+<b><i class="fas fa-mouse-pointer"></i> Osoittakaa</b> sitten yhtäaikaa valitsemianne ilmiötä. Voit myös olla valitsematta mitään.
 
 <b>Siivotkaa</b> pöydältä ne ilmiöt, jotka eivät tulleet valituksi.
 
-<b>Eteenpäin <i class="fas fa-play"></i></b> -nappi jakaa valittavaksi uusia ilmiöitä, kunnes pöydällä on 5 valittua ilmiötä.
+<b>Jakakaa ja valitkaa</b> ilmiöitä, kunnes olette päätyneet 5 muutosvoimaan ja painakaa <b>Eteenpäin <i class="fas fa-play"></i></b>.
 `,
   },
 
