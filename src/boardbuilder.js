@@ -10,18 +10,24 @@ var boardbuilder = function() {
 
   const FRAME_4_WIDTH = 2000;
 
+  const LOWER_PANEL_ANCHOR_Y = 0.3;
+
   var NamedWidgets = {};
   var WidgetsModified = false;
 
   const box = (x0,y0, w,h, padding=0) => {
     const setPadding = (v) => padding = v;
-    const getX = (anchor) => (w-2*padding)*anchor+x0+padding;
-    const getY = (anchor) => (h-2*padding)*anchor+y0+padding;
-    const centerBox = () => [getX(0.5), getY(0.5), w, h];
+    const outerX = (anchor) => w*anchor+x0;
+    const outerY = (anchor) => h*anchor+y0;
+    const innerX = (anchor) => (w-2*padding)*anchor+x0+padding;
+    const innerY = (anchor) => (h-2*padding)*anchor+y0+padding;
+    const centerBox = () => [outerX(0.5), outerY(0.5), w, h];
     return {
       setPadding,
-      getX,
-      getY,
+      innerX,
+      innerY,
+      outerX,
+      outerY,
       centerBox,
     }
   }
@@ -38,7 +44,7 @@ var boardbuilder = function() {
     let boxFrame1 = box((FRAME_WIDTH+FRAME_MARGIN)*1,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
     let boxFrame2 = box((FRAME_WIDTH+FRAME_MARGIN)*2,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
     let boxFrame3 = box((FRAME_WIDTH+FRAME_MARGIN)*3,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
-    let boxFrame4 = box((FRAME_WIDTH+FRAME_MARGIN)*3,0, FRAME_4_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
+    let boxFrame4 = box((FRAME_WIDTH+FRAME_MARGIN)*4,0, FRAME_4_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
 
     if (!await verifyWidget("Frame0")) {
       addWidget("Frame0", await createFrame(...boxFrame0.centerBox(), "Pelaajien nimet"));
@@ -46,13 +52,28 @@ var boardbuilder = function() {
 
     if (!await verifyWidget("Frame1")) {
       addWidget("Frame1", await createFrame(...boxFrame1.centerBox(), "Me ja skenaarion luonne"));
+      let boxFrame1a = box(
+        boxFrame1.innerX(0.00), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
+        boxFrame1.innerX(0.33), boxFrame1.innerY(1)
+      );
+      let boxFrame1b = box(
+        boxFrame1.innerX(0.33), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
+        boxFrame1.innerX(0.67), boxFrame1.innerY(1)
+      );
+      let boxFrame1c = box(
+        boxFrame1.innerX(0.67), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
+        boxFrame1.innerX(1.00), boxFrame1.innerY(1)
+      );
+      await createHiddenShape(...boxFrame1a.centerBox, "SCENARIO_ACTOR_CONTAINER");
+      await createHiddenShape(...boxFrame1b.centerBox, "SCENARIO_YEAR_CONTAINER");
+      await createHiddenShape(...boxFrame1c.centerBox, "SCENARIO_STYLE_CONTAINER");
     }
-
+    
     if (!await verifyWidget("Frame2")) {
       addWidget("Frame2", await createFrame(...boxFrame2.centerBox(), "Tulevaisuuden maailma"));
     }
     if (!await verifyWidget("DealButton")) {
-      addWidget("DealButton", await createSticker(boxFrame2.getX(0.5), boxFrame2.getY(0.25), "Jaa Ilmiökortti", "#ff9d48"));
+      addWidget("DealButton", await createSticker(boxFrame2.innerX(0.5), boxFrame2.innerY(0.25), "Jaa Ilmiökortti", "#ff9d48"));
     }
 
     if (!await verifyWidget("Frame3")) {
@@ -112,6 +133,38 @@ var boardbuilder = function() {
       "x": x,
       "y": y,
       "scale": 1,
+      "text": text,
+    }]);
+    return createdWidgets[0].id;
+  }
+
+  async function createHiddenShape(x, y, w, h, text) {
+    let createdWidgets = await miro.board.widgets.create([{
+      "type": "SHAPE",
+      "style": {
+        "shapeType": 3,
+        "backgroundColor": "transparent",
+        "backgroundOpacity": 1,
+        "borderColor": "transparent",
+        "borderWidth": 2,
+        "borderOpacity": 1,
+        "borderStyle": 2,
+        "fontFamily": 10,
+        "textColor": "#e6e6e6",
+        "textAlign": "c",
+        "textAlignVertical": "m",
+        "fontSize": 27,
+        "bold": 0,
+        "italic": 0,
+        "underline": 0,
+        "strike": 0,
+        "highlighting": ""
+      },
+      "clientVisible": true,
+      "x": x,
+      "y": y,
+      "width": w,
+      "height": h,
       "text": text,
     }]);
     return createdWidgets[0].id;
