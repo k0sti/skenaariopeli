@@ -10,7 +10,7 @@ var boardbuilder = function() {
 
   const FRAME_4_WIDTH = 2000;
 
-  const LOWER_PANEL_ANCHOR_Y = 0.15;
+  const LOWER_PANEL_ANCHOR_Y = 0.18;
 
   var NamedWidgets = {};
   var WidgetsModified = false;
@@ -77,7 +77,7 @@ var boardbuilder = function() {
       await createBoxShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER", 24, "#ffffff");
       await createBoxShape(...boxFrame1a.centerBox(), `esim. "Yle", "Verkosto"`, 24, "#808080", "b");
       await createBoxShape(...boxFrame1b.centerBox(), `esim. "2030", "2050"`, 24, "#808080", "b");
-      await createBoxShape(...boxFrame1c.centerBox(), `esim. toivottava/epätoivottava, todennäköinen/epätodennäköinen`, 24, "#808080", "b");
+      await createBoxShape(...boxFrame1c.centerBox(), `esim. toivottava / epätoivottava, todennäköinen / epätodennäköinen`, 24, "#808080", "b");
       await createBoxShape(...boxFrame1a.centerBox(), "Me (1 kortti)", 24, "#000000");
       await createBoxShape(...boxFrame1b.centerBox(), "Vuosi (1 kortti)", 24, "#000000");
       await createBoxShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)", 24, "#000000");
