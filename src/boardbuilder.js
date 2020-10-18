@@ -57,7 +57,6 @@ var boardbuilder = function() {
     }
 
     if (!await verifyWidget("Frame1")) {
-      addWidget("Frame1", await createFrame(...boxFrame1.centerBox(), "Me ja skenaarion luonne"));
       let boxFrame1a = boundingBox(
         boxFrame1.innerX(0.00), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
         boxFrame1.innerX(0.33), boxFrame1.innerY(1)
@@ -70,29 +69,32 @@ var boardbuilder = function() {
         boxFrame1.innerX(0.67), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
         boxFrame1.innerX(1.00), boxFrame1.innerY(1)
       );
-      await createHiddenShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", "#ffffff");
-      await createHiddenShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", "#ffffff");
-      await createHiddenShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER", "#ffffff");
-      await createHiddenShape(...boxFrame1a.centerBox(), "Me (1 kortti)", "#000000");
-      await createHiddenShape(...boxFrame1b.centerBox(), "Vuosi (1 kortti)", "#000000");
-      await createHiddenShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)", "#000000");
+      addWidget("Frame1", await createFrame(...boxFrame1.centerBox(), "1. Me ja skenaarion luonne"));
+      await createBoxShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", "#ffffff");
+      await createBoxShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", "#ffffff");
+      await createBoxShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER", "#ffffff");
+      await createBoxShape(...boxFrame1a.centerBox(), "Me (1 kortti)", "#000000");
+      await createBoxShape(...boxFrame1b.centerBox(), "Vuosi (1 kortti)", "#000000");
+      await createBoxShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)", "#000000");
       await createLine(boxFrame1a.outerX(1), boxFrame1a.outerY(0), boxFrame1a.outerX(1), boxFrame1a.outerY(1));
       await createLine(boxFrame1b.outerX(1), boxFrame1b.outerY(0), boxFrame1b.outerX(1), boxFrame1b.outerY(1));
     }
     
     if (!await verifyWidget("Frame2")) {
-      addWidget("Frame2", await createFrame(...boxFrame2.centerBox(), "Tulevaisuuden maailma"));
+      addWidget("Frame2", await createFrame(...boxFrame2.centerBox(), "2. Tulevaisuuden maailma"));
+      await createBoxShape(...boxFrame2.centerBox(), "<p><strong>1/6 Me ja skenaarion luonne</strong></p><p>Näkökulmamme tulevaisuuden tarkasteluun</p>");
     }
+
     if (!await verifyWidget("DealButton")) {
       addWidget("DealButton", await createSticker(boxFrame2.innerX(0.5), boxFrame2.innerY(0.25), "Jaa Ilmiökortti", "#ff9d48"));
     }
 
     if (!await verifyWidget("Frame3")) {
-      addWidget("Frame3", await createFrame(...boxFrame3.centerBox(), "Me vuonna 20xx"));
+      addWidget("Frame3", await createFrame(...boxFrame3.centerBox(), "3. Me vuonna 20xx"));
     }
 
     if (!await verifyWidget("Frame4")) {
-      addWidget("Frame4", await createFrame(...boxFrame4.centerBox(), "Miten tähän päädyttiin?"));
+      addWidget("Frame4", await createFrame(...boxFrame4.centerBox(), "4. Miten tähän päädyttiin?"));
     }
 
     if (WidgetsModified) {
@@ -149,7 +151,7 @@ var boardbuilder = function() {
     return createdWidgets[0].id;
   }
 
-  async function createHiddenShape(x, y, w, h, text, textColor = "#000000", vAlign="t", align="l") {
+  async function createBoxShape(x, y, w, h, text, textColor = "#000000", vAlign="t", align="l") {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "SHAPE",
       "style": {
@@ -161,7 +163,7 @@ var boardbuilder = function() {
         "borderOpacity": 1,
         "borderStyle": 2,
         "fontFamily": 10,
-        "textColor": "#e6e6e6",
+        "textColor": textColor,
         "textAlign": align, // l|c|r
         "textAlignVertical": vAlign, // t|m|b
         "fontSize": 24,
