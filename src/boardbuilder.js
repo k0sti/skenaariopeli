@@ -168,6 +168,9 @@ var boardbuilder = function() {
         "strike": 0,
         "highlighting": ""
       },
+      "capabilities": {
+        "editable": false
+      },
       "clientVisible": true,
       "x": x,
       "y": y,
