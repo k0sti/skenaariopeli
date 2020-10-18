@@ -74,7 +74,7 @@ var boardbuilder = function() {
         boxFrame1.innerX(1.00), boxFrame1.innerY(1)
       );
       addWidget("Frame1", await createFrame(...boxFrame1.centerBox(), "1. Me ja skenaarion luonne"));
-      await createBoxShape(...boxFrame2.boxTitle(), "<p><strong>1/6 Me ja skenaarion luonne</strong></p><p>Näkökulmamme tulevaisuuden tarkasteluun</p>", 36);
+      await createBoxShape(...boxTitle.centerBox(), "<p><strong>1/6 Me ja skenaarion luonne</strong></p><p>Näkökulmamme tulevaisuuden tarkasteluun</p>", 36);
 
       await createBoxShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", 24, "#ffffff");
       await createBoxShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", 24, "#ffffff");
