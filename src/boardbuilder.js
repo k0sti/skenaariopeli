@@ -39,7 +39,7 @@ var boardbuilder = function() {
     }
 
     if (!await verifyWidget("DealButton")) {
-      addWidget("DealButton", await createSticker((FRAME_WIDTH+FRAME_MARGIN)*2,200, "Jaa Ilmiökortti", "#ff9d48"));
+      addWidget("DealButton", await createSticker((FRAME_WIDTH+FRAME_MARGIN)*2,-380, "Jaa Ilmiökortti", "#ff9d48"));
     }
 
     if (WidgetsModified) {
