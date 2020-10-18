@@ -57,6 +57,10 @@ var boardbuilder = function() {
     }
 
     if (!await verifyWidget("Frame1")) {
+      let boxTitle = boundingBox(
+        boxFrame1.innerX(0.00), boxFrame1.innerY(0),
+        boxFrame1.innerX(1.00), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y)
+      );
       let boxFrame1a = boundingBox(
         boxFrame1.innerX(0.00), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
         boxFrame1.innerX(0.33), boxFrame1.innerY(1)
@@ -70,20 +74,20 @@ var boardbuilder = function() {
         boxFrame1.innerX(1.00), boxFrame1.innerY(1)
       );
       addWidget("Frame1", await createFrame(...boxFrame1.centerBox(), "1. Me ja skenaarion luonne"));
-      await createBoxShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", "#ffffff");
-      await createBoxShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", "#ffffff");
-      await createBoxShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER", "#ffffff");
-      await createBoxShape(...boxFrame1a.centerBox(), "Me (1 kortti)", "#000000");
-      await createBoxShape(...boxFrame1b.centerBox(), "Vuosi (1 kortti)", "#000000");
-      await createBoxShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)", "#000000");
+      await createBoxShape(...boxFrame2.boxTitle(), "<p><strong>1/6 Me ja skenaarion luonne</strong></p><p>Näkökulmamme tulevaisuuden tarkasteluun</p>", 36);
+
+      await createBoxShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", 24, "#ffffff");
+      await createBoxShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", 24, "#ffffff");
+      await createBoxShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER", 24, "#ffffff");
+      await createBoxShape(...boxFrame1a.centerBox(), "Me (1 kortti)", 24, "#000000");
+      await createBoxShape(...boxFrame1b.centerBox(), "Vuosi (1 kortti)", 24, "#000000");
+      await createBoxShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)", 24, "#000000");
       await createLine(boxFrame1a.outerX(1), boxFrame1a.outerY(0), boxFrame1a.outerX(1), boxFrame1a.outerY(1));
       await createLine(boxFrame1b.outerX(1), boxFrame1b.outerY(0), boxFrame1b.outerX(1), boxFrame1b.outerY(1));
     }
     
     if (!await verifyWidget("Frame2")) {
       addWidget("Frame2", await createFrame(...boxFrame2.centerBox(), "2. Tulevaisuuden maailma"));
-      // await createBoxShape(...boxFrame2.centerBox(), "<p><strong>1/6 Me ja skenaarion luonne</strong></p><p>Näkökulmamme tulevaisuuden tarkasteluun</p>");
-      await createBoxShape(...boxFrame2.centerBox(), "Näkökulmamme tulevaisuuden tarkasteluun");
     }
 
     if (!await verifyWidget("DealButton")) {
@@ -152,7 +156,7 @@ var boardbuilder = function() {
     return createdWidgets[0].id;
   }
 
-  async function createBoxShape(x, y, w, h, text, textColor = "#000000", vAlign="t", align="l") {
+  async function createBoxShape(x, y, w, h, text, fontSize=24, textColor = "#000000", vAlign="t", align="l") {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "SHAPE",
       "style": {
@@ -167,7 +171,7 @@ var boardbuilder = function() {
         "textColor": textColor,
         "textAlign": align, // l|c|r
         "textAlignVertical": vAlign, // t|m|b
-        "fontSize": 24,
+        "fontSize": fontSize,
         "bold": 0,
         "italic": 0,
         "underline": 0,
