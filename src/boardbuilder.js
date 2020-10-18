@@ -82,7 +82,8 @@ var boardbuilder = function() {
     
     if (!await verifyWidget("Frame2")) {
       addWidget("Frame2", await createFrame(...boxFrame2.centerBox(), "2. Tulevaisuuden maailma"));
-      await createBoxShape(...boxFrame2.centerBox(), "<p><strong>1/6 Me ja skenaarion luonne</strong></p><p>Näkökulmamme tulevaisuuden tarkasteluun</p>");
+      // await createBoxShape(...boxFrame2.centerBox(), "<p><strong>1/6 Me ja skenaarion luonne</strong></p><p>Näkökulmamme tulevaisuuden tarkasteluun</p>");
+      await createBoxShape(...boxFrame2.centerBox(), "Näkökulmamme tulevaisuuden tarkasteluun");
     }
 
     if (!await verifyWidget("DealButton")) {
