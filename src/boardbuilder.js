@@ -2,7 +2,7 @@ var boardbuilder = function() {
 
   const SHARED_NAMED_WIDGETS = "NamedWidgets";
 
-  var NamedWidgets;
+  var NamedWidgets = {};
   var WidgetsModified = false;
 
   async function build() {
