@@ -10,7 +10,7 @@ var boardbuilder = function() {
 
   const FRAME_4_WIDTH = 2000;
 
-  const LOWER_PANEL_ANCHOR_Y = 0.3;
+  const LOWER_PANEL_ANCHOR_Y = 0.22;
 
   var NamedWidgets = {};
   var WidgetsModified = false;
