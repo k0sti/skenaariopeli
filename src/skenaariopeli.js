@@ -162,7 +162,15 @@ var skenaariopeli = function() {
               "SCENARIO_YEAR_CONTAINER"
             );
             if (yearResponse.success) {
-              replacements["{scenario_year}"] = yearResponse.value;
+              let targetYear = parseInt(yearResponse.value) || 2030;
+              let yearNow = new Date().getFullYear();
+              let lastBackcastYear = targetYear-1;
+              let yearStep = (lastBackcastYear - yearNow) / 4;
+              replacements["{scenario_year}"] = targetYear;
+              replacements["{backcast_year_4}"] = lastBackcastYear;
+              replacements["{backcast_year_3}"] = Math.round(lastBackcastYear - yearStep);
+              replacements["{backcast_year_2}"] = Math.round(lastBackcastYear - yearStep * 2);
+              replacements["{backcast_year_1}"] = Math.round(lastBackcastYear - yearStep * 3);
             }
           }
         }
