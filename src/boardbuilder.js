@@ -75,6 +75,9 @@ var boardbuilder = function() {
       await createBoxShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", 24, "#ffffff");
       await createBoxShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", 24, "#ffffff");
       await createBoxShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER", 24, "#ffffff");
+      await createBoxShape(...boxFrame1a.centerBox(), `esim. "Yle", "Verkosto"`, 24, "#808080", "b");
+      await createBoxShape(...boxFrame1b.centerBox(), `esim. "2030", "2050"`, 24, "#808080", "b");
+      await createBoxShape(...boxFrame1c.centerBox(), `esim. toivottava/epätoivottava, todennäköinen/epätodennäköinen`, 24, "#808080", "b");
       await createBoxShape(...boxFrame1a.centerBox(), "Me (1 kortti)", 24, "#000000");
       await createBoxShape(...boxFrame1b.centerBox(), "Vuosi (1 kortti)", 24, "#000000");
       await createBoxShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)", 24, "#000000");
@@ -125,7 +128,7 @@ var boardbuilder = function() {
     WidgetsModified = true;
   }
 
-  async function createFrame(x, y, w, h, title, descriptionText = null) {
+  async function createFrame(x, y, w, h, title) {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "FRAME",
       "x": x,
@@ -145,7 +148,7 @@ var boardbuilder = function() {
       box.innerX(0.00), box.innerY(0),
       box.innerX(1.00), box.innerY(LOWER_PANEL_ANCHOR_Y)
     );
-    return await createBoxShape(...boxTitle.centerBox(), descriptionText, 36);
+    return await createBoxShape(...boxTitle.centerBox(), descriptionText, 28);
   }
 
 
