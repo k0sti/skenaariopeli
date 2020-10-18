@@ -207,9 +207,9 @@ var boardbuilder = function() {
       "type": "SHAPE",
       "style": {
         "shapeType": 3,
-        "backgroundColor": "transparent",
+        "backgroundColor": "#e6e6e6",
         "backgroundOpacity": 1,
-        "borderColor": "#000000",
+        "borderColor": "transparent",
         "borderWidth": 1,
         "borderOpacity": 1,
         "borderStyle": 4,
