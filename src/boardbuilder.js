@@ -184,6 +184,7 @@ var boardbuilder = function() {
   }
 
   async function createLine(x0, y0, x1, y1) {
+    /*
     let createdWidgets = await miro.board.widgets.create([{
       "type": "LINE",
       "style": {
@@ -203,6 +204,35 @@ var boardbuilder = function() {
         "y": y1,
       },
     }]);
+    */
+    let createdWidgets = await miro.board.widgets.create([{
+      "type": "SHAPE",
+      "style": {
+        "shapeType": 3,
+        "backgroundColor": "transparent",
+        "backgroundOpacity": 1,
+        "borderColor": "#000000",
+        "borderWidth": 1,
+        "borderOpacity": 1,
+        "borderStyle": 4,
+        "fontFamily": 10,
+        "textColor": "#e6e6e6",
+        "textAlign": "c",
+        "textAlignVertical": "m",
+        "fontSize": 27,
+        "bold": 0,
+        "italic": 0,
+        "underline": 0,
+        "strike": 0,
+        "highlighting": ""
+      },
+      "clientVisible": true,
+      "x": x0,
+      "y": (y0+y1)*0.5,
+      "width": 0,
+      "height": (y1-y0),
+    }]);
+
     return createdWidgets[0].id;
   }
 
