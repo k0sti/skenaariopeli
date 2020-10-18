@@ -67,6 +67,8 @@ var boardbuilder = function() {
       await createHiddenShape(...boxFrame1a.centerBox, "SCENARIO_ACTOR_CONTAINER");
       await createHiddenShape(...boxFrame1b.centerBox, "SCENARIO_YEAR_CONTAINER");
       await createHiddenShape(...boxFrame1c.centerBox, "SCENARIO_STYLE_CONTAINER");
+      await createLine(boxFrame1a.outerX(1), boxFrame1a.outerY(0), boxFrame1a.outerX(1), boxFrame1a.outerY(1));
+      await createLine(boxFrame1b.outerX(1), boxFrame1b.outerY(0), boxFrame1b.outerX(1), boxFrame1b.outerY(1));
     }
     
     if (!await verifyWidget("Frame2")) {
@@ -166,6 +168,29 @@ var boardbuilder = function() {
       "width": w,
       "height": h,
       "text": text,
+    }]);
+    return createdWidgets[0].id;
+  }
+
+  async function createLine(x0, y0, x1, y1) {
+    let createdWidgets = await miro.board.widgets.create([{
+      "type": "LINE",
+      "style": {
+        "lineColor": "#000000",
+        "lineStyle": 4,
+        "lineThickness": 1,
+        "lineType": 0,
+        "lineStartStyle": 0,
+        "lineEndStyle": 0
+      },
+      "startPosition": {
+        "x": x0,
+        "y": y0,
+      },
+      "endPosition": {
+        "x": x1,
+        "y": y1,
+      },
     }]);
     return createdWidgets[0].id;
   }
