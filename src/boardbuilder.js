@@ -70,9 +70,12 @@ var boardbuilder = function() {
         boxFrame1.innerX(0.67), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
         boxFrame1.innerX(1.00), boxFrame1.innerY(1)
       );
-      await createHiddenShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER");
-      await createHiddenShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER");
-      await createHiddenShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER");
+      await createHiddenShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", "#ffffff");
+      await createHiddenShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", "#ffffff");
+      await createHiddenShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER", "#ffffff");
+      await createHiddenShape(...boxFrame1a.centerBox(), "Me (1 kortti)", "#000000");
+      await createHiddenShape(...boxFrame1b.centerBox(), "Vuosi (1 kortti)", "#000000");
+      await createHiddenShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)", "#000000");
       await createLine(boxFrame1a.outerX(1), boxFrame1a.outerY(0), boxFrame1a.outerX(1), boxFrame1a.outerY(1));
       await createLine(boxFrame1b.outerX(1), boxFrame1b.outerY(0), boxFrame1b.outerX(1), boxFrame1b.outerY(1));
     }
@@ -146,7 +149,7 @@ var boardbuilder = function() {
     return createdWidgets[0].id;
   }
 
-  async function createHiddenShape(x, y, w, h, text) {
+  async function createHiddenShape(x, y, w, h, text, textColor = "#000000", vAlign="t", align="l") {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "SHAPE",
       "style": {
@@ -158,10 +161,10 @@ var boardbuilder = function() {
         "borderOpacity": 1,
         "borderStyle": 2,
         "fontFamily": 10,
-        "textColor": "transparent",
-        "textAlign": "c",
-        "textAlignVertical": "m",
-        "fontSize": 28,
+        "textColor": "#e6e6e6",
+        "textAlign": align, // l|c|r
+        "textAlignVertical": vAlign, // t|m|b
+        "fontSize": 24,
         "bold": 0,
         "italic": 0,
         "underline": 0,
