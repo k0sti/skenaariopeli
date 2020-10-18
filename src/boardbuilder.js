@@ -14,7 +14,23 @@ var boardbuilder = function() {
     console.log(NamedWidgets);
 
     if (!await verifyWidget("Frame0")) {
-      addWidget("Frame0", await createFrame());
+      addWidget("Frame0", await createFrame(0,0, 1350,1080, "Pelaajien nimet"));
+    }
+
+    if (!await verifyWidget("Frame1")) {
+      addWidget("Frame1", await createFrame(1400,0, 1350,1080, "Me ja skenaarion luonne"));
+    }
+
+    if (!await verifyWidget("Frame2")) {
+      addWidget("Frame2", await createFrame(2800,0, 1350,1080, "Tulevaisuuden maailma"));
+    }
+
+    if (!await verifyWidget("Frame3")) {
+      addWidget("Frame3", await createFrame(4200,0, 1350,1080, "Me vuonna 20xx"));
+    }
+
+    if (!await verifyWidget("Frame4")) {
+      addWidget("Frame4", await createFrame(5600,0, 2000,1080, "Miten tähän päädyttiin?"));
     }
 
     if (WidgetsModified) {
@@ -41,17 +57,17 @@ var boardbuilder = function() {
     WidgetsModified = true;
   }
 
-  async function createFrame() {
+  async function createFrame(x, y, w, h, title) {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "FRAME",
-      "x": -1436,
-      "y": -390,
-      "width": 660,
-      "height": 540,
+      "x": x,
+      "y": y,
+      "width": w,
+      "height": h,
       "style": {
         "backgroundColor": "#ffffff"
       },
-      "title": "Pelaajien nimet"
+      "title": title
     }]);
     return createdWidgets[0].id;
   }

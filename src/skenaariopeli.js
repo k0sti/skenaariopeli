@@ -30,7 +30,8 @@ var skenaariopeli = function() {
 
   async function initialize() {
     console.log("skenaariopeli.initialize");
-    StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP));
+
+    StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP)) || 0;
 
     await boardbuilder.build();
 
@@ -130,11 +131,11 @@ var skenaariopeli = function() {
   }
 
   async function pollCallback() {
-    let destinationStep = parseInt(await mirotools.getSharedValue(SHARED_STEP));
+    let destinationStep = parseInt(await mirotools.getSharedValue(SHARED_STEP)) || 0;
     if (StepNumber != destinationStep) {
       seekStep(destinationStep);
     }
-    Seed = parseInt(await mirotools.getSharedValue(SHARED_SEED));
+    Seed = parseInt(await mirotools.getSharedValue(SHARED_SEED)) || 0;
   }
 
   async function onEnterState(stepNumber) {
