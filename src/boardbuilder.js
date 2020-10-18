@@ -64,9 +64,9 @@ var boardbuilder = function() {
         boxFrame1.innerX(0.67), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
         boxFrame1.innerX(1.00), boxFrame1.innerY(1)
       );
-      await createHiddenShape(...boxFrame1a.centerBox, "SCENARIO_ACTOR_CONTAINER");
-      await createHiddenShape(...boxFrame1b.centerBox, "SCENARIO_YEAR_CONTAINER");
-      await createHiddenShape(...boxFrame1c.centerBox, "SCENARIO_STYLE_CONTAINER");
+      await createHiddenShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER");
+      await createHiddenShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER");
+      await createHiddenShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER");
       await createLine(boxFrame1a.outerX(1), boxFrame1a.outerY(0), boxFrame1a.outerX(1), boxFrame1a.outerY(1));
       await createLine(boxFrame1b.outerX(1), boxFrame1b.outerY(0), boxFrame1b.outerX(1), boxFrame1b.outerY(1));
     }
