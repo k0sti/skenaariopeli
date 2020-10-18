@@ -125,9 +125,7 @@ var boardbuilder = function() {
     WidgetsModified = true;
   }
 
-  async function createFrame(box, title, descriptionText = null) {
-    let {x, y, w, h} = box.centerBox();
-
+  async function createFrame(x, y, w, h, title, descriptionText = null) {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "FRAME",
       "x": x,
