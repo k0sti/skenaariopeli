@@ -68,11 +68,12 @@ var skenaariopeli = function() {
         await miro.board.widgets.create([{
           type: "sticker",
           text: ilmiöCard.Ilmiö,
-          x: deckWidget.x + Math.random() * 20 - 10 + ((Seed % 3) - 1) * 200,
-          y: deckWidget.y + Math.random() * 20 + 120,
-          scale: 0.5,
+          x: deckWidget.x + Math.random() * 40 - 20 + ((Seed % 3) - 1) * 400,
+          y: deckWidget.y + Math.random() * 40 + 240,
+          scale: 1,
           style: {
             stickerType: 1,
+            fontSize: 28,
           }
         }]);
         // Clear selection
