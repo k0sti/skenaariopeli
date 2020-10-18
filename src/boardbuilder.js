@@ -57,10 +57,6 @@ var boardbuilder = function() {
     }
 
     if (!await verifyWidget("Frame1")) {
-      let boxTitle = boundingBox(
-        boxFrame1.innerX(0.00), boxFrame1.innerY(0),
-        boxFrame1.innerX(1.00), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y)
-      );
       let boxFrame1a = boundingBox(
         boxFrame1.innerX(0.00), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
         boxFrame1.innerX(0.33), boxFrame1.innerY(1)
@@ -74,7 +70,7 @@ var boardbuilder = function() {
         boxFrame1.innerX(1.00), boxFrame1.innerY(1)
       );
       addWidget("Frame1", await createFrame(...boxFrame1.centerBox(), "1. Me ja skenaarion luonne"));
-      await createBoxShape(...boxTitle.centerBox(), "<p><strong>1/6 Me ja skenaarion luonne</strong></p><p>Näkökulmamme tulevaisuuden tarkasteluun</p>", 36);
+      createFrameDescription(boxFrame1, "Näkökulmamme tulevaisuuden tarkasteluun");
 
       await createBoxShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", 24, "#ffffff");
       await createBoxShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", 24, "#ffffff");
@@ -88,6 +84,7 @@ var boardbuilder = function() {
     
     if (!await verifyWidget("Frame2")) {
       addWidget("Frame2", await createFrame(...boxFrame2.centerBox(), "2. Tulevaisuuden maailma"));
+      createFrameDescription(boxFrame2, "5 ilmiötä, jotka ovat tehneet tulevaisuuden maailmasta sellaisen kuin se on");
     }
 
     if (!await verifyWidget("DealButton")) {
@@ -96,10 +93,12 @@ var boardbuilder = function() {
 
     if (!await verifyWidget("Frame3")) {
       addWidget("Frame3", await createFrame(...boxFrame3.centerBox(), "3. Me vuonna 20xx"));
+      createFrameDescription(boxFrame3, "3 olennaista ominaisuutta, joilla olemme mukautuneet vuoden 20xx maailmaan");
     }
 
     if (!await verifyWidget("Frame4")) {
       addWidget("Frame4", await createFrame(...boxFrame4.centerBox(), "4. Miten tähän päädyttiin?"));
+      createFrameDescription(boxFrame4, "Edeltävät tapahtumat, jotka johtivat siihen, millaisia meistä tuli");
     }
 
     if (WidgetsModified) {
@@ -126,7 +125,9 @@ var boardbuilder = function() {
     WidgetsModified = true;
   }
 
-  async function createFrame(x, y, w, h, title) {
+  async function createFrame(box, title, descriptionText = null) {
+    let {x, y, w, h} = box.centerBox();
+
     let createdWidgets = await miro.board.widgets.create([{
       "type": "FRAME",
       "x": x,
@@ -140,6 +141,15 @@ var boardbuilder = function() {
     }]);
     return createdWidgets[0].id;
   }
+
+  async function createFrameDescription(box, descriptionText) {
+    let boxTitle = boundingBox(
+      box.innerX(0.00), box.innerY(0),
+      box.innerX(1.00), box.innerY(LOWER_PANEL_ANCHOR_Y)
+    );
+    return await createBoxShape(...boxTitle.centerBox(), descriptionText, 36);
+  }
+
 
   async function createSticker(x, y, text, color="#f5d128") {
     let createdWidgets = await miro.board.widgets.create([{
