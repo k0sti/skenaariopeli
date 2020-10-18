@@ -158,18 +158,15 @@ var boardbuilder = function() {
         "borderOpacity": 1,
         "borderStyle": 2,
         "fontFamily": 10,
-        "textColor": "#e6e6e6",
+        "textColor": "transparent",
         "textAlign": "c",
         "textAlignVertical": "m",
-        "fontSize": 27,
+        "fontSize": 28,
         "bold": 0,
         "italic": 0,
         "underline": 0,
         "strike": 0,
         "highlighting": ""
-      },
-      "capabilities": {
-        "editable": false
       },
       "clientVisible": true,
       "x": x,
