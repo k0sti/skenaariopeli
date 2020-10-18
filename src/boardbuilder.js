@@ -21,6 +21,8 @@ var boardbuilder = function() {
     const outerY = (anchor) => h*anchor+y0;
     const innerX = (anchor) => (w-2*padding)*anchor+x0+padding;
     const innerY = (anchor) => (h-2*padding)*anchor+y0+padding;
+    const innerWidth = (anchor=1) => (w-2*padding)*anchor;
+    const innerHeight = (anchor=1) => (h-2*padding)*anchor;
     const centerBox = () => [outerX(0.5), outerY(0.5), w, h];
     return {
       setPadding,
@@ -28,6 +30,8 @@ var boardbuilder = function() {
       innerY,
       outerX,
       outerY,
+      innerWidth,
+      innerHeight,
       centerBox,
     }
   }
@@ -54,15 +58,15 @@ var boardbuilder = function() {
       addWidget("Frame1", await createFrame(...boxFrame1.centerBox(), "Me ja skenaarion luonne"));
       let boxFrame1a = box(
         boxFrame1.innerX(0.00), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
-        boxFrame1.innerX(0.33), boxFrame1.innerY(1)
+        boxFrame1.innerWidth(0.33), boxFrame1.innerHeight(1)
       );
       let boxFrame1b = box(
         boxFrame1.innerX(0.33), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
-        boxFrame1.innerX(0.67), boxFrame1.innerY(1)
+        boxFrame1.innerWidth(0.33), boxFrame1.innerHeight(1)
       );
       let boxFrame1c = box(
         boxFrame1.innerX(0.67), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
-        boxFrame1.innerX(1.00), boxFrame1.innerY(1)
+        boxFrame1.innerWidth(0.33), boxFrame1.innerHeight(1)
       );
       await createHiddenShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER");
       await createHiddenShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER");
