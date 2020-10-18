@@ -15,17 +15,24 @@ var boardbuilder = function() {
   var NamedWidgets = {};
   var WidgetsModified = false;
 
-  const box = (x0,y0, w,h, padding=0) => {
+  const box = (x=0,y=0, w=0,h=0, padding=0) => {
+    const setBounds = (x0,y0,x1,y1) => {
+      x = x0;
+      y = y0;
+      w = x1-x0;
+      h = y1-y0;
+    }
     const setPadding = (v) => padding = v;
-    const outerX = (anchor) => w*anchor+x0;
-    const outerY = (anchor) => h*anchor+y0;
-    const innerX = (anchor) => (w-2*padding)*anchor+x0+padding;
-    const innerY = (anchor) => (h-2*padding)*anchor+y0+padding;
+    const outerX = (anchor) => w*anchor+x;
+    const outerY = (anchor) => h*anchor+y;
+    const innerX = (anchor) => (w-2*padding)*anchor+x+padding;
+    const innerY = (anchor) => (h-2*padding)*anchor+y+padding;
     const innerWidth = (anchor=1) => (w-2*padding)*anchor;
     const innerHeight = (anchor=1) => (h-2*padding)*anchor;
     const centerBox = () => [outerX(0.5), outerY(0.5), w, h];
     return {
       setPadding,
+      setBounds,
       innerX,
       innerY,
       outerX,
@@ -56,17 +63,17 @@ var boardbuilder = function() {
 
     if (!await verifyWidget("Frame1")) {
       addWidget("Frame1", await createFrame(...boxFrame1.centerBox(), "Me ja skenaarion luonne"));
-      let boxFrame1a = box(
+      let boxFrame1a = box().setBounds(
         boxFrame1.innerX(0.00), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
-        boxFrame1.innerWidth(0.33), boxFrame1.innerHeight(1)
+        boxFrame1.innerX(0.33), boxFrame1.innerY(1)
       );
-      let boxFrame1b = box(
+      let boxFrame1b = box().setBounds(
         boxFrame1.innerX(0.33), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
-        boxFrame1.innerWidth(0.33), boxFrame1.innerHeight(1)
+        boxFrame1.innerX(0.67), boxFrame1.innerY(1)
       );
-      let boxFrame1c = box(
+      let boxFrame1c = box().setBounds(
         boxFrame1.innerX(0.67), boxFrame1.innerY(LOWER_PANEL_ANCHOR_Y),
-        boxFrame1.innerWidth(0.33), boxFrame1.innerHeight(1)
+        boxFrame1.innerX(1.00), boxFrame1.innerY(1)
       );
       await createHiddenShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER");
       await createHiddenShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER");
