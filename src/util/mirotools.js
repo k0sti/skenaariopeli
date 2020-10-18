@@ -33,7 +33,7 @@ var mirotools = function() {
       await miro.board.widgets.update([{ id: element.id, text: text }]);
     } else {
       await miro.board.widgets.create([
-        { type: "sticker", text: text /* clientVisible: false, */ },
+        { type: "sticker", text: text, clientVisible: false },
       ]);
     }
   }
