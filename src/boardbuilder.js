@@ -30,7 +30,7 @@ var boardbuilder = function() {
     }
 
     if (!await verifyWidget("Frame4")) {
-      addWidget("Frame4", await createFrame(5600,0, 2000,1080, "Miten tähän päädyttiin?"));
+      addWidget("Frame4", await createFrame(5925,0, 2000,1080, "Miten tähän päädyttiin?"));
     }
 
     if (WidgetsModified) {
