@@ -30,10 +30,10 @@ var mirotools = function() {
     let element = await getMiroStickerByKey(key);
     let text = `${key}: ${value}`;
     if (element) {
-      await miro.board.widgets.update([{ id: element.id, text: text, clientVisible: false }]);
+      await miro.board.widgets.update([{ id: element.id, text: text, clientVisible: false, y: 2000 }]);
     } else {
       await miro.board.widgets.create([
-        { type: "sticker", text: text, clientVisible: false },
+        { type: "sticker", text: text, clientVisible: false, y: 2000 },
       ]);
     }
   }
