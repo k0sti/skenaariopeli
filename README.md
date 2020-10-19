@@ -16,10 +16,10 @@ Linkin haku: Miro Board "Share" > "Copy Invite Link", "Team can Edit"
 
 - Jos sinulla on jo Miro-tunnukset, kirjaudu sisään.
 - Muuten tee Miro-tunnus ilmaiseksi painamalla "Sign up", varmista sähköpostiosotteesi ja vastaa muutamaan Miron pakolliseen käyttäjäprofiilikysymykseen
-- Paina "Asenna skenaariopeli" ikkunassa joka on osikoitu "Skenaariopelin asennus". Tämä lisää Skenaariopeli-pluginin Miroon (omalle koneelle ei siis asenneta mitään).
+- Paina "Asenna skenaariopeli" näkymässä joka on otsikoitu "Skenaariopelin asennus". Tämä lisää Skenaariopeli-pluginin Miroon (omalle koneelle ei siis asenneta mitään).
 - Vahvista painamalla "Install" näkymässä joka on otsikoitu "Install “YLE Skenaariopeli” in your team".
-- Skenaariopeli plugin on nyt asennettu kun "Skenaariopelin asennus" ikkuna ilmestyy uudelleen.
-- Sulje ikkuna ja avaa ylläoleva linkki uudelleen, jotta muutokset tulevat voimaan
+- Skenaariopeli plugin on asennettu kun "Skenaariopelin asennus" näkymässä ilmestyy uudelleen.
+- Sulje selaimen ikkuna ja avaa ylläoleva linkki uudelleen, jotta muutokset tulevat voimaan.
 - Kun "Tervetuloa Skenaariopeliin" -näkyy sivupalkissa vasemmalla, olet valmiina pelaamaan!
 - Voit sulkea ikkunan. Uudelleenliittyminen myöhemmin käy nopeasti ylläolevasta linkistä.
 
@@ -29,7 +29,7 @@ Jos haluat osallistua katsojana, seuraa linkkiä:
 https://miro.com/app/board/XXXXXXXXXX/
 Linkin haku: Miro Board "Share" > "Copy Board Link", "Anyone can View"
 
-- Tämä ei vaadi Miro-tunnukset tekemistä
+- Tämä ei vaadi Miro-tunnuksen tekemistä
 
 
 ## SVG Icon style
