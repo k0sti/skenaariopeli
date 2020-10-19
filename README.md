@@ -1,15 +1,36 @@
-## Welcome to GitHub Pages
+## Skenaariopelin osallistumisohje
 
-You can use the [editor on GitHub](https://github.com/molybo/skenaariopeli/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Tein puhtaan Skenaariopelitaulun päivän workshoppia varten.
+Näiden linkkien voisi testaa omalla porukalla etukäteen, mikäli mahdollista ja sitten jakaa eteenpäin!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Tervetuloa pelaamaan Skenaariopeliä tänään.
+Pelissä käytetään Miro Online Whiteboardia (https://miro.com).
+Pelin aloitus käy mukavammin kun Miro-tunnukset ja mahdollisesti myös
+Skenaariopelin -Miro plugin on valmisteltu alla olevien ohjeiden mukaan.
 
-### Markdown
+Jos haluat osallistua pelaajana (suositeltavaa), seuraa linkkiä:
+================================================
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+https://miro.com/welcomeonboard/XXXXXXXXXXXXXXXX
+Linkin haku: Miro Board "Share" > "Copy Invite Link", "Team can Edit"
 
-```markdown
-Syntax highlighted code block
+- Jos sinulla on jo Miro-tunnukset, kirjaudu sisään.
+- Muuten tee Miro-tunnus ilmaiseksi painamalla "Sign up", varmista sähköpostiosotteesi ja vastaa muutamaan Miron pakolliseen käyttäjäprofiilikysymykseen
+- Paina "Asenna skenaariopeli" ikkunassa joka on osikoitu "Skenaariopelin asennus". Tämä lisää Skenaariopeli-pluginin Miroon (omalle koneelle ei siis asenneta mitään).
+- Vahvista painamalla "Install" näkymässä joka on otsikoitu "Install “YLE Skenaariopeli” in your team".
+- Skenaariopeli plugin on nyt asennettu kun "Skenaariopelin asennus" ikkuna ilmestyy uudelleen.
+- Sulje ikkuna ja avaa ylläoleva linkki uudelleen, jotta muutokset tulevat voimaan
+- Kun "Tervetuloa Skenaariopeliin" -näkyy sivupalkissa vasemmalla, olet valmiina pelaamaan!
+- Voit sulkea ikkunan. Uudelleenliittyminen myöhemmin käy nopeasti ylläolevasta linkistä.
+
+Jos haluat osallistua katsojana, seuraa linkkiä:
+================================================
+
+https://miro.com/app/board/XXXXXXXXXX/
+Linkin haku: Miro Board "Share" > "Copy Board Link", "Anyone can View"
+
+- Tämä ei vaadi Miro-tunnukset tekemistä
+
 
 ## SVG Icon style
 - size 24 x 24 px
