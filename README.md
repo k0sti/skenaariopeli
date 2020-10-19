@@ -8,30 +8,30 @@ Pelissä käytetään Miro Online Whiteboardia (https://miro.com).
 Pelin aloitus käy mukavammin kun Miro-tunnukset ja mahdollisesti myös
 Skenaariopelin -Miro plugin on valmisteltu alla olevien ohjeiden mukaan.
 
-Jos haluat osallistua pelaajana (suositeltavaa), seuraa linkkiä:
-================================================
+# Jos haluat osallistua pelaajana (suositeltavaa), seuraa linkkiä:
 
 https://miro.com/welcomeonboard/XXXXXXXXXXXXXXXX
-Linkin haku: Miro Board "Share" > "Copy Invite Link", "Team can Edit"
+(Ylläolevan linkin haku Miro-taulussa: "Share" > "Copy Invite Link", "Team can Edit")
 
-- Jos sinulla on jo Miro-tunnukset, kirjaudu sisään.
-- Muuten tee Miro-tunnus ilmaiseksi painamalla "Sign up", varmista sähköpostiosotteesi ja vastaa muutamaan Miron pakolliseen käyttäjäprofiilikysymykseen
-- Paina "Asenna skenaariopeli" näkymässä joka on otsikoitu "Skenaariopelin asennus". Tämä lisää Skenaariopeli-pluginin Miroon (omalle koneelle ei siis asenneta mitään).
-- Vahvista painamalla "Install" näkymässä joka on otsikoitu "Install “YLE Skenaariopeli” in your team".
-- Skenaariopeli plugin on asennettu kun "Skenaariopelin asennus" näkymässä ilmestyy uudelleen.
-- Sulje selaimen ikkuna ja avaa ylläoleva linkki uudelleen, jotta muutokset tulevat voimaan.
-- Kun "Tervetuloa Skenaariopeliin" -näkyy sivupalkissa vasemmalla, olet valmiina pelaamaan!
-- Voit sulkea ikkunan. Uudelleenliittyminen myöhemmin käy nopeasti ylläolevasta linkistä.
+1. Jos sinulla on jo Miro-tunnukset, kirjaudu sisään.
+2. Muuten tee Miro-tunnus ilmaiseksi painamalla "Sign up", varmista sähköpostiosotteesi ja vastaa muutamaan Miron pakolliseen käyttäjäprofiilikysymykseen
+3. Paina "Asenna skenaariopeli" ikkunassa joka on osikoitu "Skenaariopelin asennus". Tämä lisää Skenaariopeli-pluginin Miroon (omalle koneelle ei siis asenneta mitään).
+4. Vahvista painamalla "Install" näkymässä joka on otsikoitu "Install “YLE Skenaariopeli” in your team".
+5. Skenaariopeli plugin on nyt asennettu kun "Skenaariopelin asennus" ikkuna ilmestyy uudelleen.
+6. Sulje ikkuna.
+7. Avaa ylläoleva linkki uudelleen, jotta muutokset tulevat voimaan
+8. Kun "Tervetuloa Skenaariopeliin" -näkyy sivupalkissa vasemmalla, olet valmiina pelaamaan!
+9. Voit sulkea ikkunan. Uudelleenliittyminen myöhemmin käy nopeasti ylläolevasta linkistä.
 
-Jos haluat osallistua katsojana, seuraa linkkiä:
-================================================
+# Jos haluat osallistua katsojana, seuraa linkkiä:
 
 https://miro.com/app/board/XXXXXXXXXX/
-Linkin haku: Miro Board "Share" > "Copy Board Link", "Anyone can View"
+(Ylläolevan linkin haku Miro-taulussa: "Share" > "Copy Board Link", "Anyone can View")
 
-- Tämä ei vaadi Miro-tunnuksen tekemistä
-
+- Tämä ei vaadi Miro-tunnuksen tekemistä.
+- Katsoja ei voi kirjoittaa tarralappuja eikä näe Skenaariopelin ohjeita.
 
 ## SVG Icon style
+
 - size 24 x 24 px
 - stroke-width 2px
