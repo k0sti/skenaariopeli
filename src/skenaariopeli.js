@@ -86,6 +86,10 @@ var skenaariopeli = function() {
         miro.board.selection.selectWidgets([]);
         Seed++;
         mirotools.setSharedValue(SHARED_SEED, Seed);
+      } else {
+        if (widget.metadata[MiroAppId]?.description) {
+          alert(widget.metadata[MiroAppId].description);
+        }
       }
     }
   }
