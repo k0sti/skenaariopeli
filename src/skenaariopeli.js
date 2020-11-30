@@ -46,7 +46,7 @@ var skenaariopeli = function() {
   }
 
   function shuffleIlmiöt() {
-    Deck = ilmiöt.filter(ilmiö => ilmiö.Gen);
+    Deck = ilmiöt.slice();
     Deck.sort(function (a, b) { return 0.5 - Math.random() });
   }
 
