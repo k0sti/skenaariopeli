@@ -19,5 +19,7 @@ async function loadSheetData() {
 
   const items = tabletop["Kortit"].elements;
 
-  ilmiöt = items.slice().filter(row => row["Gen"])
+  ilmiöt = items.slice().filter(row => row["Gen"]);
+
+  console.log(`${ilmiöt.length} rows loaded`);
 }
