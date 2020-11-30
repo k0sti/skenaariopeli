@@ -2,6 +2,7 @@ var skenaariopeli = function() {
   const SHARED_STEP = "Step";
   const SHARED_SEED = "Seed";
 
+  var MiroAppId;
   var StepNumber = 0;
   var Seed = 0;
   var Deck = [];
@@ -31,6 +32,8 @@ var skenaariopeli = function() {
   async function initialize() {
     console.log("skenaariopeli.initialize");
 
+    MiroAppId = await miro.getClientId();
+    console.log(`Miro App Id: ${MiroAppId}`);
     StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP)) || 0;
 
     await boardbuilder.build();
@@ -74,6 +77,11 @@ var skenaariopeli = function() {
           style: {
             stickerType: 1,
             fontSize: 28,
+          },
+          metadata: {
+            [MiroAppId]: {
+              description: ilmiöCard["Mistä on kyse?"]
+            }
           }
         }]);
         // Clear selection
