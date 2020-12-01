@@ -98,9 +98,11 @@ var skenaariopeli = function() {
           `;
           mui.overlay('on', modalEl);
         } else {
-          mui.overlay('off', modalEl);
+          mui.overlay('off');
         }
       }
+    } else {
+      mui.overlay('off');
     }
   }
 
