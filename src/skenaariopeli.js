@@ -78,6 +78,7 @@ var skenaariopeli = function() {
           },
           metadata: {
             [MiroAppId]: {
+              title: ilmiöCard["Ilmiö"],
               description: ilmiöCard["Mistä on kyse?"]
             }
           }
@@ -88,7 +89,16 @@ var skenaariopeli = function() {
         mirotools.setSharedValue(SHARED_SEED, Seed);
       } else {
         if (widget.metadata[MiroAppId]?.description) {
-          alert(widget.metadata[MiroAppId].description);
+          var modalEl = document.createElement('div');
+          modalEl.innerHTML = `
+            <div class="modal">
+              <h3>${widget.metadata[MiroAppId].title}</h3>
+              <p>${widget.metadata[MiroAppId].description}</p>
+            </div>
+          `;
+          mui.overlay('on', modalEl);
+        } else {
+          mui.overlay('off', modalEl);
         }
       }
     }
