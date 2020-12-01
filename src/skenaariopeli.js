@@ -93,7 +93,7 @@ var skenaariopeli = function() {
           modalEl.innerHTML = `
             <div class="modal">
               <h3>${widget.metadata[MiroAppId].title}</h3>
-              <p>${widget.metadata[MiroAppId].description}</p>
+              ${formatPlainText(widget.metadata[MiroAppId].description)}
             </div>
           `;
           mui.overlay('on', modalEl);
