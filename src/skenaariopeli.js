@@ -89,6 +89,7 @@ var skenaariopeli = function() {
         mirotools.setSharedValue(SHARED_SEED, Seed);
       } else {
         if (widget.metadata[MiroAppId]?.description) {
+          // Show card details
           var modalEl = document.createElement('div');
           modalEl.innerHTML = `
             <div class="modal">
@@ -96,7 +97,7 @@ var skenaariopeli = function() {
               ${formatPlainText(widget.metadata[MiroAppId].description)}
             </div>
           `;
-          mui.overlay('on', modalEl);
+          mui.overlay('on', modalEl, {'keyboard': false});
         } else {
           mui.overlay('off');
         }
