@@ -43,6 +43,7 @@ var boardbuilder = function() {
   const boxFrame2 = box((FRAME_WIDTH+FRAME_MARGIN)*2,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
   const boxFrame3 = box((FRAME_WIDTH+FRAME_MARGIN)*3,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
   const getBoxFrame4 = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*4,0, FRAME_4_WIDTHS[subPhase],FRAME_HEIGHT, FRAME_PADDING);
+  const getBoxFrame4Dimmer = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*4,0, FRAME_4_WIDTHS[subPhase],FRAME_HEIGHT, FRAME_PADDING);
 
   async function build() {
     WidgetsModified = false;
@@ -100,8 +101,9 @@ var boardbuilder = function() {
     }
 
     if (!await verifyWidget("Frame4")) {
-      addWidget("Frame4", await createFrame(...getBoxFrame4(0).centerBox(), "4. Miten tähän päädyttiin?"));
-      createFrameDescription(getBoxFrame4(0), "Edeltävät tapahtumat, jotka johtivat siihen, millaisia meistä tuli");
+      addWidget("Frame4", await createFrame(...getBoxFrame4(3).centerBox(), "4. Miten tähän päädyttiin?"));
+      createFrameDescription(getBoxFrame4(0), "Edeltävät tapahtumat, <br/>jotka johtivat siihen, <br/>millaisia meistä tuli");
+      addWidget("Frame4Dimmer", await createBoxShape(...getBoxFrame4Dimmer(1).centerBox(), "", 24, "#000000", { "backgroundColor": "#1a1a1a", "backgroundOpacity": 0.2 }));
     }
 
     if (WidgetsModified) {
@@ -144,9 +146,9 @@ var boardbuilder = function() {
   }
 
   async function setBackcastSubphase(subPhase) {
-    let [x, y, w, h] = getBoxFrame4(subPhase).centerBox();
+    let [x, y, w, h] = getBoxFrame4Dimmer(subPhase).centerBox();
     miro.board.widgets.update([{
-      id: NamedWidgets["Frame4"],
+      id: NamedWidgets["Frame4Dimmer"],
       "x": x,
       "y": y,
       "width": w,
@@ -178,7 +180,7 @@ var boardbuilder = function() {
     return createdWidgets[0].id;
   }
 
-  async function createBoxShape(x, y, w, h, text, fontSize=24, textColor = "#000000", vAlign="t", align="l") {
+  async function createBoxShape(x, y, w, h, text, fontSize=24, textColor = "#000000", vAlign="t", align="l", styleOverrides={}) {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "SHAPE",
       "style": {
@@ -198,7 +200,8 @@ var boardbuilder = function() {
         "italic": 0,
         "underline": 0,
         "strike": 0,
-        "highlighting": ""
+        "highlighting": "",
+        ...styleOverrides
       },
       "clientVisible": true,
       "x": x,
