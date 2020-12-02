@@ -8,7 +8,7 @@ var boardbuilder = function() {
   const FRAME_PADDING = 25;
   const FRAME_MARGIN = 50;
 
-  const FRAME_4_WIDTH = 2000;
+  const FRAME_4_WIDTHS = [500, 1000, 1500, 2000];
 
   const LOWER_PANEL_ANCHOR_Y = 0.18;
 
@@ -38,6 +38,12 @@ var boardbuilder = function() {
 
   const boundingBox = (x0,y0,x1,y1) => box(x0, y0, x1-x0, y1-y0);
 
+  const boxFrame0 = box(0,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
+  const boxFrame1 = box((FRAME_WIDTH+FRAME_MARGIN)*1,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
+  const boxFrame2 = box((FRAME_WIDTH+FRAME_MARGIN)*2,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
+  const boxFrame3 = box((FRAME_WIDTH+FRAME_MARGIN)*3,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
+  const getBoxFrame4 = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*4,0, FRAME_4_WIDTHS[subPhase],FRAME_HEIGHT, FRAME_PADDING);
+
   async function build() {
     WidgetsModified = false;
 
@@ -45,12 +51,6 @@ var boardbuilder = function() {
     console.log(j);
     if (j) NamedWidgets = await JSON.parse(j);
     console.log(NamedWidgets);
-
-    let boxFrame0 = box(0,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
-    let boxFrame1 = box((FRAME_WIDTH+FRAME_MARGIN)*1,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
-    let boxFrame2 = box((FRAME_WIDTH+FRAME_MARGIN)*2,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
-    let boxFrame3 = box((FRAME_WIDTH+FRAME_MARGIN)*3,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
-    let boxFrame4 = box((FRAME_WIDTH+FRAME_MARGIN)*4,0, FRAME_4_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
 
     if (!await verifyWidget("Frame0")) {
       addWidget("Frame0", await createFrame(...boxFrame0.centerBox(), "Pelaajien nimet"));
@@ -100,8 +100,8 @@ var boardbuilder = function() {
     }
 
     if (!await verifyWidget("Frame4")) {
-      addWidget("Frame4", await createFrame(...boxFrame4.centerBox(), "4. Miten tähän päädyttiin?"));
-      createFrameDescription(boxFrame4, "Edeltävät tapahtumat, jotka johtivat siihen, millaisia meistä tuli");
+      addWidget("Frame4", await createFrame(...getBoxFrame4(0).centerBox(), "4. Miten tähän päädyttiin?"));
+      createFrameDescription(getBoxFrame4(0), "Edeltävät tapahtumat, jotka johtivat siihen, millaisia meistä tuli");
     }
 
     if (WidgetsModified) {
@@ -141,6 +141,17 @@ var boardbuilder = function() {
       "title": title
     }]);
     return createdWidgets[0].id;
+  }
+
+  async function setBackcastSubphase(subPhase) {
+    let [x, y, w, h] = getBoxFrame4(subPhase).centerBox();
+    miro.board.widgets.update([{
+      id: NamedWidgets["Frame4"],
+      "x": x,
+      "y": y,
+      "width": w,
+      "height": h
+    }]);
   }
 
   async function createFrameDescription(box, descriptionText) {
@@ -253,6 +264,7 @@ var boardbuilder = function() {
   }
 
   return {
-    build
+    build,
+    setBackcastSubphase
   }
 }();

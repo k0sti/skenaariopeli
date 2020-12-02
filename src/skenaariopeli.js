@@ -97,10 +97,7 @@ var skenaariopeli = function() {
               ${formatPlainText(widget.metadata[MiroAppId].description)}
             </div>
           `;
-          let activeElement = document.activeElement;
           mui.overlay('on', modalEl, {'keyboard': false});
-          // Don't steal focus from active element
-          if (activeElement) activeElement.focus();
         } else {
           mui.overlay('off');
         }
@@ -198,6 +195,23 @@ var skenaariopeli = function() {
               replacements["{backcast_year_2}"] = Math.round(lastBackcastYear - yearStep * 2);
               replacements["{backcast_year_1}"] = Math.round(lastBackcastYear - yearStep * 3);
             }
+            break;
+          }
+          case "Frame4a": {
+            boardbuilder.setBackcastSubphase(0);
+            break;
+          }
+          case "Frame4b": {
+            boardbuilder.setBackcastSubphase(1);
+            break;
+          }
+          case "Frame4c": {
+            boardbuilder.setBackcastSubphase(2);
+            break;
+          }
+          case "Frame4d": {
+            boardbuilder.setBackcastSubphase(3);
+            break;
           }
         }
       }
