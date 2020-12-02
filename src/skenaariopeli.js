@@ -97,7 +97,10 @@ var skenaariopeli = function() {
               ${formatPlainText(widget.metadata[MiroAppId].description)}
             </div>
           `;
+          let activeElement = document.activeElement;
           mui.overlay('on', modalEl, {'keyboard': false});
+          // Don't steal focus from active element
+          if (activeElement) activeElement.focus();
         } else {
           mui.overlay('off');
         }
