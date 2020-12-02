@@ -127,6 +127,7 @@ Eletään vuotta {scenario_year}. Seuraavaksi muistellaan, mitkä aiemmat tapaht
     title: "4/6 Miten tähän päädyttiin?",
     cuePoint: false,
     id: "Frame4b",
+    focus: "Frame4",
     body: `
 <b><i class="far fa-sticky-note"></i> Kirjoita</b> kortille jokin kiinnostava kehityskulku vuoden {backcast_year_3} paikkeilta, joka vaikutti jonkin ominaisuuden kehittymiseen.
 
@@ -142,6 +143,7 @@ Eletään vuotta {scenario_year}. Seuraavaksi muistellaan, mitkä aiemmat tapaht
     title: "4/6 Miten tähän päädyttiin?",
     cuePoint: false,
     id: "Frame4c",
+    focus: "Frame4",
     body: `
 <b><i class="far fa-sticky-note"></i> Kirjoita</b> kortille jokin kiinnostava kehityskulku vuoden {backcast_year_2} paikkeilta, joka vaikutti jonkin ominaisuuden kehittymiseen.
 
@@ -157,6 +159,7 @@ Eletään vuotta {scenario_year}. Seuraavaksi muistellaan, mitkä aiemmat tapaht
     title: "4/6 Miten tähän päädyttiin?",
     cuePoint: false,
     id: "Frame4d",
+    focus: "Frame4",
     body: `
 <b><i class="far fa-sticky-note"></i> Kirjoita</b> kortille jokin kiinnostava kehityskulku vuoden {backcast_year_1} paikkeilta, joka vaikutti jonkin ominaisuuden kehittymiseen.
 

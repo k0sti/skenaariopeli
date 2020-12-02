@@ -8,7 +8,7 @@ var boardbuilder = function() {
   const FRAME_PADDING = 25;
   const FRAME_MARGIN = 50;
 
-  const FRAME_4_WIDTHS = [500, 1000, 1500, 2000];
+  const FRAME_4_WIDTHS = [1000, 1330, 1660, 2000];
 
   const LOWER_PANEL_ANCHOR_Y = 0.18;
 
