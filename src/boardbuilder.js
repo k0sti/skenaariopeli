@@ -8,7 +8,8 @@ var boardbuilder = function() {
   const FRAME_PADDING = 25;
   const FRAME_MARGIN = 50;
 
-  const FRAME_4_WIDTHS = [1000, 1330, 1660, 2000];
+  const FRAME_4_WIDTH = 2000;
+  const FRAME_4_DIMMER_WIDTHS = [1500, 1000, 500, 0];
 
   const LOWER_PANEL_ANCHOR_Y = 0.18;
 
@@ -42,8 +43,8 @@ var boardbuilder = function() {
   const boxFrame1 = box((FRAME_WIDTH+FRAME_MARGIN)*1,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
   const boxFrame2 = box((FRAME_WIDTH+FRAME_MARGIN)*2,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
   const boxFrame3 = box((FRAME_WIDTH+FRAME_MARGIN)*3,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
-  const getBoxFrame4 = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*4,0, FRAME_4_WIDTHS[subPhase],FRAME_HEIGHT, FRAME_PADDING);
-  const getBoxFrame4Dimmer = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*4,0, FRAME_4_WIDTHS[subPhase],FRAME_HEIGHT, FRAME_PADDING);
+  const getBoxFrame4 = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*4,0, FRAME_4_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
+  const getBoxFrame4Dimmer = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*4+(FRAME_4_WIDTH-FRAME_4_DIMMER_WIDTHS[subPhase]),0, FRAME_4_DIMMER_WIDTHS[subPhase],FRAME_HEIGHT, FRAME_PADDING);
 
   async function build() {
     WidgetsModified = false;
@@ -73,15 +74,15 @@ var boardbuilder = function() {
       addWidget("Frame1", await createFrame(...boxFrame1.centerBox(), "1. Me ja skenaarion luonne"));
       createFrameDescription(boxFrame1, "Näkökulmamme tulevaisuuden tarkasteluun");
 
-      await createBoxShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", 24, "#ffffff");
-      await createBoxShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", 24, "#ffffff");
-      await createBoxShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER", 24, "#ffffff");
-      await createBoxShape(...boxFrame1a.centerBox(), `esim. "Yle", "Verkosto"`, 24, "#808080", "b");
-      await createBoxShape(...boxFrame1b.centerBox(), `esim. "2030", "2050"`, 24, "#808080", "b");
-      await createBoxShape(...boxFrame1c.centerBox(), `esim. toivottava / epätoivottava, todennäköinen / epätodennäköinen`, 24, "#808080", "b");
-      await createBoxShape(...boxFrame1a.centerBox(), "Me (1 kortti)", 24, "#000000");
-      await createBoxShape(...boxFrame1b.centerBox(), "Vuosi (1 kortti)", 24, "#000000");
-      await createBoxShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)", 24, "#000000");
+      await createBoxShape(...boxFrame1a.centerBox(), "SCENARIO_ACTOR_CONTAINER", {fontSize: 24, textColor: "#ffffff"});
+      await createBoxShape(...boxFrame1b.centerBox(), "SCENARIO_YEAR_CONTAINER", {fontSize: 24, textColor: "#ffffff"});
+      await createBoxShape(...boxFrame1c.centerBox(), "SCENARIO_STYLE_CONTAINER", {fontSize: 24, textColor: "#ffffff"});
+      await createBoxShape(...boxFrame1a.centerBox(), `esim. "Yle", "Verkosto"`, {fontSize: 24, textColor: "#808080", textAlignVertical: "b"});
+      await createBoxShape(...boxFrame1b.centerBox(), `esim. "2030", "2050"`, {fontSize: 24, textColor: "#808080", textAlignVertical: "b"});
+      await createBoxShape(...boxFrame1c.centerBox(), `esim. toivottava / epätoivottava, todennäköinen / epätodennäköinen`, {fontSize: 24, textColor: "#808080", textAlignVertical: "b"});
+      await createBoxShape(...boxFrame1a.centerBox(), "Me (1 kortti)");
+      await createBoxShape(...boxFrame1b.centerBox(), "Vuosi (1 kortti)");
+      await createBoxShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)");
       await createLine(boxFrame1a.outerX(1), boxFrame1a.outerY(0), boxFrame1a.outerX(1), boxFrame1a.outerY(1));
       await createLine(boxFrame1b.outerX(1), boxFrame1b.outerY(0), boxFrame1b.outerX(1), boxFrame1b.outerY(1));
     }
@@ -103,7 +104,7 @@ var boardbuilder = function() {
     if (!await verifyWidget("Frame4")) {
       addWidget("Frame4", await createFrame(...getBoxFrame4(3).centerBox(), "4. Miten tähän päädyttiin?"));
       createFrameDescription(getBoxFrame4(0), "Edeltävät tapahtumat, <br/>jotka johtivat siihen, <br/>millaisia meistä tuli");
-      addWidget("Frame4Dimmer", await createBoxShape(...getBoxFrame4Dimmer(1).centerBox(), "", 24, "#000000", { "backgroundColor": "#1a1a1a", "backgroundOpacity": 0.2 }));
+      addWidget("Frame4Dimmer", await createBoxShape(...getBoxFrame4Dimmer(3).centerBox(), "", { "backgroundColor": "#1a1a1a", "backgroundOpacity": 0.2 }));
     }
 
     if (WidgetsModified) {
@@ -161,7 +162,7 @@ var boardbuilder = function() {
       box.innerX(0.00), box.innerY(0),
       box.innerX(1.00), box.innerY(LOWER_PANEL_ANCHOR_Y)
     );
-    return await createBoxShape(...boxTitle.centerBox(), descriptionText, 28);
+    return await createBoxShape(...boxTitle.centerBox(), descriptionText, {fontSize: 28});
   }
 
 
@@ -180,7 +181,7 @@ var boardbuilder = function() {
     return createdWidgets[0].id;
   }
 
-  async function createBoxShape(x, y, w, h, text, fontSize=24, textColor = "#000000", vAlign="t", align="l", styleOverrides={}) {
+  async function createBoxShape(x, y, w, h, text, styleOverrides={}) {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "SHAPE",
       "style": {
@@ -192,10 +193,10 @@ var boardbuilder = function() {
         "borderOpacity": 1,
         "borderStyle": 2,
         "fontFamily": 10,
-        "textColor": textColor,
-        "textAlign": align, // l|c|r
-        "textAlignVertical": vAlign, // t|m|b
-        "fontSize": fontSize,
+        "textColor": "#000000",
+        "textAlign": "l", // l|c|r
+        "textAlignVertical": "t", // t|m|b
+        "fontSize": 24,
         "bold": 0,
         "italic": 0,
         "underline": 0,
