@@ -1,7 +1,8 @@
 var ilmiöt = [];
 
 const SPREADSHEET_URL =
-  "1qswMijuMmv6wzbPzx8B8IBX3e1-otjM1Hk06KzxhQOE";
+  "1TA9l300L6nobufLbuAeqAaMppQTu1T21WQAJmPRjRG4";
+//  "1qswMijuMmv6wzbPzx8B8IBX3e1-otjM1Hk06KzxhQOE";
 
 (async() => {
   /*await*/ loadSheetData();
