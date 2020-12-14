@@ -91,13 +91,15 @@ var boardbuilder = function() {
       await createLine(boxFrame1a.outerX(1), boxFrame1a.outerY(0), boxFrame1a.outerX(1), boxFrame1a.outerY(1));
       await createLine(boxFrame1b.outerX(1), boxFrame1b.outerY(0), boxFrame1b.outerX(1), boxFrame1b.outerY(1));
 
-      await createSticker(boxFrame2.innerX(0.25), boxFrame2.innerY(0.5), "Me");
-
-      await createSticker(boxFrame2.innerX(0.50), boxFrame2.innerY(0.5), "2030");
-
       let luonneStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "m", "textAlignVertical": "m"};
-      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.4),SMALL_SLOT,SMALL_SLOT, "1", luonneStyling);
-      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.7),SMALL_SLOT,SMALL_SLOT, "2", luonneStyling);
+      await createBoxShape(boxFrame1.innerX(0.17),boxFrame1.innerY(0.5),SMALL_SLOT,SMALL_SLOT, "Me", luonneStyling);
+      await createSticker(boxFrame1.innerX(0.17), boxFrame1.innerY(0.5), "Me");
+
+      await createBoxShape(boxFrame1.innerX(0.50),boxFrame1.innerY(0.5),SMALL_SLOT,SMALL_SLOT, "2030", luonneStyling);
+      await createSticker(boxFrame1.innerX(0.50), boxFrame1.innerY(0.5), "2030");
+
+      await createBoxShape(boxFrame1.innerX(0.83),boxFrame1.innerY(0.4),SMALL_SLOT,SMALL_SLOT, "1", luonneStyling);
+      await createBoxShape(boxFrame1.innerX(0.83),boxFrame1.innerY(0.7),SMALL_SLOT,SMALL_SLOT, "2", luonneStyling);
     }
     
     if (!await verifyWidget("Frame2")) {
@@ -195,8 +197,8 @@ var boardbuilder = function() {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "STICKER",
       "style": {
-        "stickerBackgroundColor": "#f5d128",
         "stickerType": 0,
+        "stickerBackgroundColor": "#fff9b1",
         ...styleOverrides
       },
       "x": x,
