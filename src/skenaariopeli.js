@@ -163,8 +163,7 @@ var skenaariopeli = function() {
     if (mirotools.isMiroEnabled()) {
       // Handle Miro board focus
       if (stateData.focus) {
-        let widget = (await miro.board.widgets.get({ id: namedWidgets[stateData.focus] }))[0];
-        miro.board.viewport.zoomToObject(widget.id)
+        miro.board.viewport.zoomToObject(stateData.focus.map(name => namedWidgets[name]));
       }
 
       if (stateData.id) {

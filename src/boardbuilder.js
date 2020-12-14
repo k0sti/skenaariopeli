@@ -8,6 +8,8 @@ var boardbuilder = function() {
   const FRAME_PADDING = 25;
   const FRAME_MARGIN = 50;
 
+  const FRAME_3_WIDTH = 810;
+
   const FRAME_4_WIDTH = 2000;
   const FRAME_4_DIMMER_WIDTHS = [1500, 1000, 500, 0];
 
@@ -47,9 +49,9 @@ var boardbuilder = function() {
   const boxFrame0 = box(0,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
   const boxFrame1 = box((FRAME_WIDTH+FRAME_MARGIN)*1,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
   const boxFrame2 = box((FRAME_WIDTH+FRAME_MARGIN)*2,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
-  const boxFrame3 = box((FRAME_WIDTH+FRAME_MARGIN)*3,0, FRAME_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
-  const getBoxFrame4 = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*4,0, FRAME_4_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
-  const getBoxFrame4Dimmer = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*4+(FRAME_4_WIDTH-FRAME_4_DIMMER_WIDTHS[subPhase]),0, FRAME_4_DIMMER_WIDTHS[subPhase],FRAME_HEIGHT, FRAME_PADDING);
+  const boxFrame3 = box((FRAME_WIDTH+FRAME_MARGIN)*3,0, FRAME_3_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
+  const getBoxFrame4 = (subPhase) => box((FRAME_WIDTH+FRAME_MARGIN)*3+(FRAME_3_WIDTH+FRAME_MARGIN),0, FRAME_4_WIDTH,FRAME_HEIGHT, FRAME_PADDING);
+  const getBoxFrame4Dimmer = (subPhase) => box(getBoxFrame4(subPhase).outerX(0)+(FRAME_4_WIDTH-FRAME_4_DIMMER_WIDTHS[subPhase]),0, FRAME_4_DIMMER_WIDTHS[subPhase],FRAME_HEIGHT, FRAME_PADDING);
 
   async function build() {
     WidgetsModified = false;
