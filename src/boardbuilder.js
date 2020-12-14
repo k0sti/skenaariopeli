@@ -90,10 +90,17 @@ var boardbuilder = function() {
     if (!await verifyWidget("Frame2")) {
       addWidget("Frame2", await createFrame(...boxFrame2.centerBox(), "2. Tulevaisuuden maailma"));
       createFrameDescription(boxFrame2, "5 ilmiötä, jotka ovat tehneet tulevaisuuden maailmasta sellaisen kuin se on");
+
+      let ilmiöStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5};
+      await createBoxShape(boxFrame2.innerX(0.15),boxFrame2.innerY(0.25),290,170, "ilmiö", ilmiöStyling);
+      await createBoxShape(boxFrame2.innerX(0.50),boxFrame2.innerY(0.25),290,170, "ilmiö", ilmiöStyling);
+      await createBoxShape(boxFrame2.innerX(0.85),boxFrame2.innerY(0.25),290,170, "ilmiö", ilmiöStyling);
+      await createBoxShape(boxFrame2.innerX(0.15),boxFrame2.innerY(0.50),290,170, "ilmiö", ilmiöStyling);
+      await createBoxShape(boxFrame2.innerX(0.85),boxFrame2.innerY(0.50),290,170, "ilmiö", ilmiöStyling);
     }
 
     if (!await verifyWidget("DealButton")) {
-      addWidget("DealButton", await createSticker(boxFrame2.innerX(0.5), boxFrame2.innerY(0.25), "Jaa Ilmiökortti", "#ff9d48"));
+      addWidget("DealButton", await createSticker(boxFrame2.innerX(0.5), boxFrame2.innerY(0.5), "Jaa Ilmiökortti", "#ff9d48"));
     }
 
     if (!await verifyWidget("Frame3")) {
