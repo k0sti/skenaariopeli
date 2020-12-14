@@ -63,7 +63,6 @@ var skenaariopeli = function() {
     if (widgets.length === 1) {
       let widget = widgets[0];
       if (widget.id === namedWidgets.DealButton) {
-        console.log("DEAL CARD!");
         let deckWidget = (await miro.board.widgets.get({ id: namedWidgets.DealButton }))[0];
         let ilmiöCard = popIlmiö();
         await miro.board.widgets.create([{

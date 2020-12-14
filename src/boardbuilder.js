@@ -13,6 +13,11 @@ var boardbuilder = function() {
 
   const LOWER_PANEL_ANCHOR_Y = 0.18;
 
+  const SMALL_SLOT = 180;
+
+  const BIG_SLOT_W = 290;
+  const BIG_SLOT_H = 170;
+
   var NamedWidgets = {};
   var WidgetsModified = false;
 
@@ -85,27 +90,40 @@ var boardbuilder = function() {
       await createBoxShape(...boxFrame1c.centerBox(), "Skenaarion luonne (1-2 korttia)");
       await createLine(boxFrame1a.outerX(1), boxFrame1a.outerY(0), boxFrame1a.outerX(1), boxFrame1a.outerY(1));
       await createLine(boxFrame1b.outerX(1), boxFrame1b.outerY(0), boxFrame1b.outerX(1), boxFrame1b.outerY(1));
+
+      await createSticker(boxFrame2.innerX(0.25), boxFrame2.innerY(0.5), "Me");
+
+      await createSticker(boxFrame2.innerX(0.50), boxFrame2.innerY(0.5), "2030");
+
+      let luonneStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "m", "textAlignVertical": "m"};
+      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.4),SMALL_SLOT,SMALL_SLOT, "1", luonneStyling);
+      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.7),SMALL_SLOT,SMALL_SLOT, "2", luonneStyling);
     }
     
     if (!await verifyWidget("Frame2")) {
       addWidget("Frame2", await createFrame(...boxFrame2.centerBox(), "2. Tulevaisuuden maailma"));
       createFrameDescription(boxFrame2, "5 ilmiötä, jotka ovat tehneet tulevaisuuden maailmasta sellaisen kuin se on");
 
-      let ilmiöStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5};
-      await createBoxShape(boxFrame2.innerX(0.15),boxFrame2.innerY(0.25),290,170, "ilmiö", ilmiöStyling);
-      await createBoxShape(boxFrame2.innerX(0.50),boxFrame2.innerY(0.25),290,170, "ilmiö", ilmiöStyling);
-      await createBoxShape(boxFrame2.innerX(0.85),boxFrame2.innerY(0.25),290,170, "ilmiö", ilmiöStyling);
-      await createBoxShape(boxFrame2.innerX(0.15),boxFrame2.innerY(0.50),290,170, "ilmiö", ilmiöStyling);
-      await createBoxShape(boxFrame2.innerX(0.85),boxFrame2.innerY(0.50),290,170, "ilmiö", ilmiöStyling);
+      let ilmiöStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "m", "textAlignVertical": "m"};
+      await createBoxShape(boxFrame2.innerX(0.15),boxFrame2.innerY(0.25),BIG_SLOT_W,BIG_SLOT_H, "ilmiö", ilmiöStyling);
+      await createBoxShape(boxFrame2.innerX(0.50),boxFrame2.innerY(0.25),BIG_SLOT_W,BIG_SLOT_H, "ilmiö", ilmiöStyling);
+      await createBoxShape(boxFrame2.innerX(0.85),boxFrame2.innerY(0.25),BIG_SLOT_W,BIG_SLOT_H, "ilmiö", ilmiöStyling);
+      await createBoxShape(boxFrame2.innerX(0.15),boxFrame2.innerY(0.50),BIG_SLOT_W,BIG_SLOT_H, "ilmiö", ilmiöStyling);
+      await createBoxShape(boxFrame2.innerX(0.85),boxFrame2.innerY(0.50),BIG_SLOT_W,BIG_SLOT_H, "ilmiö", ilmiöStyling);
     }
 
     if (!await verifyWidget("DealButton")) {
-      addWidget("DealButton", await createSticker(boxFrame2.innerX(0.5), boxFrame2.innerY(0.5), "Jaa Ilmiökortti", "#ff9d48"));
+      addWidget("DealButton", await createSticker(boxFrame2.innerX(0.5), boxFrame2.innerY(0.5), "Jaa Ilmiökortti", {stickerBackgroundColor: "#ff9d48"}));
     }
 
     if (!await verifyWidget("Frame3")) {
       addWidget("Frame3", await createFrame(...boxFrame3.centerBox(), "3. Me vuonna 20xx"));
       createFrameDescription(boxFrame3, "3 olennaista ominaisuutta, joilla olemme mukautuneet vuoden 20xx maailmaan");
+
+      let ominaisuusStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "m", "textAlignVertical": "m"};
+      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.25),BIG_SLOT_W,BIG_SLOT_H, "1", ominaisuusStyling);
+      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.50),BIG_SLOT_W,BIG_SLOT_H, "2", ominaisuusStyling);
+      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.75),BIG_SLOT_W,BIG_SLOT_H, "3", ominaisuusStyling);
     }
 
     if (!await verifyWidget("Frame4")) {
@@ -173,12 +191,13 @@ var boardbuilder = function() {
   }
 
 
-  async function createSticker(x, y, text, color="#f5d128") {
+  async function createSticker(x, y, text, styleOverrides={}) {
     let createdWidgets = await miro.board.widgets.create([{
       "type": "STICKER",
       "style": {
-        "stickerBackgroundColor": color,
-        "stickerType": 0
+        "stickerBackgroundColor": "#f5d128",
+        "stickerType": 0,
+        ...styleOverrides
       },
       "x": x,
       "y": y,
@@ -222,27 +241,6 @@ var boardbuilder = function() {
   }
 
   async function createLine(x0, y0, x1, y1) {
-    /*
-    let createdWidgets = await miro.board.widgets.create([{
-      "type": "LINE",
-      "style": {
-        "lineColor": "#000000",
-        "lineStyle": 4,
-        "lineThickness": 1,
-        "lineType": 0,
-        "lineStartStyle": 0,
-        "lineEndStyle": 0
-      },
-      "startPosition": {
-        "x": x0,
-        "y": y0,
-      },
-      "endPosition": {
-        "x": x1,
-        "y": y1,
-      },
-    }]);
-    */
     let createdWidgets = await miro.board.widgets.create([{
       "type": "SHAPE",
       "style": {
