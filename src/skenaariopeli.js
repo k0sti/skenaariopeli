@@ -73,6 +73,7 @@ var skenaariopeli = function() {
           scale: 1,
           style: {
             stickerType: 1,
+            fontFamily: 10,
             fontSize: 28,
           },
           metadata: {
