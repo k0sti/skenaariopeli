@@ -91,7 +91,7 @@ var boardbuilder = function() {
       await createLine(boxFrame1a.outerX(1), boxFrame1a.outerY(0), boxFrame1a.outerX(1), boxFrame1a.outerY(1));
       await createLine(boxFrame1b.outerX(1), boxFrame1b.outerY(0), boxFrame1b.outerX(1), boxFrame1b.outerY(1));
 
-      let luonneStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "m", "textAlignVertical": "m"};
+      let luonneStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "c", "textAlignVertical": "m"};
       await createBoxShape(boxFrame1.innerX(0.17),boxFrame1.innerY(0.5),SMALL_SLOT,SMALL_SLOT, "Me", luonneStyling);
       await createSticker(boxFrame1.innerX(0.17), boxFrame1.innerY(0.5), "Me");
 
@@ -106,7 +106,7 @@ var boardbuilder = function() {
       addWidget("Frame2", await createFrame(...boxFrame2.centerBox(), "2. Tulevaisuuden maailma"));
       createFrameDescription(boxFrame2, "5 ilmiötä, jotka ovat tehneet tulevaisuuden maailmasta sellaisen kuin se on");
 
-      let ilmiöStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "m", "textAlignVertical": "m"};
+      let ilmiöStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "c", "textAlignVertical": "m"};
       await createBoxShape(boxFrame2.innerX(0.15),boxFrame2.innerY(0.25),BIG_SLOT_W,BIG_SLOT_H, "ilmiö", ilmiöStyling);
       await createBoxShape(boxFrame2.innerX(0.50),boxFrame2.innerY(0.25),BIG_SLOT_W,BIG_SLOT_H, "ilmiö", ilmiöStyling);
       await createBoxShape(boxFrame2.innerX(0.85),boxFrame2.innerY(0.25),BIG_SLOT_W,BIG_SLOT_H, "ilmiö", ilmiöStyling);
@@ -122,10 +122,10 @@ var boardbuilder = function() {
       addWidget("Frame3", await createFrame(...boxFrame3.centerBox(), "3. Me vuonna 20xx"));
       createFrameDescription(boxFrame3, "3 olennaista ominaisuutta, joilla olemme mukautuneet vuoden 20xx maailmaan");
 
-      let ominaisuusStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "m", "textAlignVertical": "m"};
-      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.25),BIG_SLOT_W,BIG_SLOT_H, "1", ominaisuusStyling);
-      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.50),BIG_SLOT_W,BIG_SLOT_H, "2", ominaisuusStyling);
-      await createBoxShape(boxFrame2.innerX(0.75),boxFrame2.innerY(0.75),BIG_SLOT_W,BIG_SLOT_H, "3", ominaisuusStyling);
+      let ominaisuusStyling = {fontSize: 70, textColor: "#cecece", "backgroundColor": "#e6e6e6", "backgroundOpacity": 0.5, "textAlign": "c", "textAlignVertical": "m"};
+      await createBoxShape(boxFrame3.innerX(0.75),boxFrame3.innerY(0.25),BIG_SLOT_W,BIG_SLOT_H, "1", ominaisuusStyling);
+      await createBoxShape(boxFrame3.innerX(0.75),boxFrame3.innerY(0.50),BIG_SLOT_W,BIG_SLOT_H, "2", ominaisuusStyling);
+      await createBoxShape(boxFrame3.innerX(0.75),boxFrame3.innerY(0.75),BIG_SLOT_W,BIG_SLOT_H, "3", ominaisuusStyling);
     }
 
     if (!await verifyWidget("Frame4")) {
