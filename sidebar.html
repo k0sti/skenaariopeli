@@ -47,6 +47,10 @@
         justify-items: stretch;
       }
 
+      .modalBg {
+        display: none; position: fixed; z-index: 50; top: 0; left: 0; bottom: 0; right: 0; background-color: #00000040; margin: 0; overflow: hidden;
+      }
+
       .modal {
         box-sizing: border-box; background-color: #fff9b1; margin: 100px auto; width: 80vw; padding: 10px; height:70vh; overflow-y: auto;
       }
@@ -54,6 +58,10 @@
   </head>
 
   <body>
+    <div id="modalBg" class="modalBg" onclick="hideModal()">
+      <div id="modal" class="modal">
+      </div>
+    </div>
     <div class="top">
       <div class="content">
         <h1 id="step_head"></h1>
@@ -104,6 +112,17 @@
 
       async function stepBackward(skipToCue) {
         skenaariopeli.stepBackward(skipToCue);
+      }
+
+      function hideModal() {
+        document.getElementById("modalBg").style.display = "none";
+      }
+
+      function showModal(html) {
+        var modalEl = document.createElement('div');
+        modalEl.innerHTML = `<div id="modal" class="modal">${html}</div>`;
+        document.getElementById("modal").replaceWith(modalEl);
+        document.getElementById("modalBg").style.display = "block";
       }
 
     </script>

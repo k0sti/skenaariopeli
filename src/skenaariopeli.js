@@ -90,20 +90,16 @@ var skenaariopeli = function() {
       } else {
         if (widget.metadata[MiroAppId]?.description) {
           // Show card details
-          var modalEl = document.createElement('div');
-          modalEl.innerHTML = `
-            <div class="modal">
-              <h3>${widget.metadata[MiroAppId].title}</h3>
-              ${formatPlainText(widget.metadata[MiroAppId].description)}
-            </div>
-          `;
-          mui.overlay('on', modalEl, {'keyboard': false});
+          showModal(`
+            <h3>${widget.metadata[MiroAppId].title}</h3>
+            ${formatPlainText(widget.metadata[MiroAppId].description)}
+          `);
         } else {
-          mui.overlay('off');
+          hideModal();
         }
       }
     } else {
-      mui.overlay('off');
+      hideModal();
     }
   }
 
