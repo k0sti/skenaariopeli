@@ -32,6 +32,13 @@ var skenaariopeli = function() {
   async function initialize() {
     console.log("skenaariopeli.initialize");
 
+    if (miro.getClientId) {
+      MiroAppId = miro.getClientId();
+      console.log(`Setting Miro Client Id to ${MiroAppId}`);
+    } else {
+      console.warn(`Reverting to DEFAULT Miro Client Id ${MiroAppId}`);
+    }
+
     StepNumber = parseInt(await mirotools.getSharedValue(SHARED_STEP)) || 0;
 
     await boardbuilder.build();
