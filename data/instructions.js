@@ -174,7 +174,7 @@ Eletään vuotta {scenario_year}. Seuraavaksi muistellaan, mitkä aiemmat tapaht
     body: `
 Valmistelkaa ja kertokaa 2 minuutin tarina tulevaisuuden maailmasta, itsestänne siellä sekä kohokohdat tapahtumista, jotka siihen johtivat.
 
-<i>Vinkki: Tarinan dokumentoimiseen voi käyttää vaikkapa videopuhelun tallennustoimintoa [Ohjeita].</i>
+<i>Vinkki: Tarinan dokumentoimiseen voi käyttää vaikkapa videopuhelun tallennustoimintoa tai kuvata kännykällä ruutua.</i>
 `,
   },
 
