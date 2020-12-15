@@ -106,16 +106,16 @@ var boardbuilder = function() {
       await createBoxShape(boxFrame1.innerX(0.83),boxFrame1.innerY(0.4),SMALL_SLOT,SMALL_SLOT, "1", luonneStyling);
       await createBoxShape(boxFrame1.innerX(0.83),boxFrame1.innerY(0.7),SMALL_SLOT,SMALL_SLOT, "2", luonneStyling);
 
-      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*0, "Konservatiivinen");
-      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*0, "Edistyksellinen");
-      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*1, "Epätodennäköinen");
-      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*1, "Todennäköinen");
-      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*2, "Parannuksiin keskittyvä");
-      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*2, "Läpimurtoja etsivä");
-      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*3, "Epämieluisa");
-      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*3, "Mieluisa");
-      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*4, "Paikallinen");
-      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1)+CARD_RAD+CARD_SPACING*4, "Ylikansallinen");
+      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*0, "Konservatiivinen");
+      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*0, "Edistyksellinen");
+      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*1, "Epätodennäköinen");
+      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*1, "Todennäköinen");
+      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*2, "Parannuksiin keskittyvä");
+      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*2, "Läpimurtoja etsivä");
+      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*3, "Epämieluisa");
+      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*3, "Mieluisa");
+      await createSticker(boxFrame1.innerX(0.83)-CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*4, "Paikallinen");
+      await createSticker(boxFrame1.innerX(0.83)+CARD_RAD, boxFrame1.outerY(1.05)+CARD_RAD+CARD_SPACING*4, "Ylikansallinen");
     }
     
     if (!await verifyWidget("Frame2")) {
