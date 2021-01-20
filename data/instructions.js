@@ -78,7 +78,7 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
   {
     title: "3/6 {scenario_actor} vuonna {scenario_year}",
     cuePoint: true,
-    focus: ["Frame3"],
+    focus: ["Frame2", "Frame3"],
     body: `
 <b><i class="far fa-sticky-note"></i> Kirjoita</b> omalle kortille lyhyt kuvaus siitä, miten ryhmänne {scenario_actor} on sopeutunut vuoden {scenario_year} maailmaan.
 <i>Voit jatkaa virkettä "Vuonna {scenario_year} {scenario_actor}..."</i>
@@ -102,6 +102,8 @@ Kirjoittakaa kortille <i class="far fa-sticky-note"></i>, minkä luonteisen sken
 <b><i class="fas fa-mouse-pointer"></i> Osoita</b> kuvausta, joka on mielestäsi olennaisin ja skenaarion luonteen mukainen.
 
 <b>Keskustelkaa</b> valinnoista ja jättäkää pöydälle 3 kuvausta. Muokatkaa ja yhdistäkää tarvittaessa.
+
+<i>Vinkki: Väritä lopuksi laput omilla väreillään!</i>
 `,
   },
 
